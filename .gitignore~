@@ -29,9 +29,3 @@
 
 # Output Directories
 */out/*
-
-# Eclipse settings
-.cproject
-.project
-*/.settings/*
-
