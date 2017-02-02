@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef MIFARE_READER_EXT_H_
-#define MIFARE_READER_EXT_H_
+#ifndef MIFARE_READERTEMPLATE_UTILmam_EXT_H_
+#define MIFARE_READERTEMPLATE_UTILmam_EXT_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -44,4 +44,4 @@
  * Log History
  *
  *=====================================================================================*/
-#endif /*MIFARE_READER_EXT_H_*/
+#endif /*MIFARE_READERTEMPLATE_UTILmam_EXT_H_*/

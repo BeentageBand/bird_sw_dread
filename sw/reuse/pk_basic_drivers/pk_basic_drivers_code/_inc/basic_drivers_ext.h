@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef BASIC_DRIVERS_EXT_H_
-#define BASIC_DRIVERS_EXT_H_
+#ifndef BASIC_DRIVERSTEMPLATE_UTILmam_EXT_H_
+#define BASIC_DRIVERSTEMPLATE_UTILmam_EXT_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -44,4 +44,4 @@
  * Log History
  *
  *=====================================================================================*/
-#endif /*BASIC_DRIVERS_EXT_H_*/
+#endif /*BASIC_DRIVERSTEMPLATE_UTILmam_EXT_H_*/

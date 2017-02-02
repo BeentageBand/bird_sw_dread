@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef BIRD_SW_FRIENDS_EXT_H_
-#define BIRD_SW_FRIENDS_EXT_H_
+#ifndef BIRD_SW_FRIENDSTEMPLATE_UTILmam_EXT_H_
+#define BIRD_SW_FRIENDSTEMPLATE_UTILmam_EXT_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -44,4 +44,4 @@
  * Log History
  *
  *=====================================================================================*/
-#endif /*BIRD_SW_FRIENDS_EXT_H_*/
+#endif /*BIRD_SW_FRIENDSTEMPLATE_UTILmam_EXT_H_*/

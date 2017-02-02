@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef DREAD_SIGNAL_EXT_H_
-#define DREAD_SIGNAL_EXT_H_
+#ifndef DREAD_SIGNALTEMPLATE_UTILmam_EXT_H_
+#define DREAD_SIGNALTEMPLATE_UTILmam_EXT_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -44,4 +44,4 @@
  * Log History
  *
  *=====================================================================================*/
-#endif /*DREAD_SIGNAL_EXT_H_*/
+#endif /*DREAD_SIGNALTEMPLATE_UTILmam_EXT_H_*/

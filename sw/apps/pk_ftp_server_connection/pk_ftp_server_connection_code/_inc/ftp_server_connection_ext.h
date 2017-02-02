@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef FTP_SERVER_CONNECTION_EXT_H_
-#define FTP_SERVER_CONNECTION_EXT_H_
+#ifndef FTP_SERVER_CONNECTIONTEMPLATE_UTILmam_EXT_H_
+#define FTP_SERVER_CONNECTIONTEMPLATE_UTILmam_EXT_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -44,4 +44,4 @@
  * Log History
  *
  *=====================================================================================*/
-#endif /*FTP_SERVER_CONNECTION_EXT_H_*/
+#endif /*FTP_SERVER_CONNECTIONTEMPLATE_UTILmam_EXT_H_*/
