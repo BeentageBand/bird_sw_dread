@@ -27,6 +27,8 @@ extern "C" {
 
 #define DREAD_STDIN_INFO_SIZE (4U)  /*Saved info is for rfid card at uint32_t (4 bytes)*/
 #define DREAD_STDIN_STR_INFO_SIZE (10U) /*Saved info in strings is 10 digits long)*/
+#define DR_STDIN_TOTAL_REGISTERS (40U)
+#define DR_STDIN_REGISTER_SIZE (20U)
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/

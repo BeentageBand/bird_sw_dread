@@ -1,5 +1,5 @@
 #=======================================================================================#
-# dread_slv_makefile.mk
+# dread_mst_makefile.mk
 #=======================================================================================#
 #  Created on: Oct 3, 2015
 #      Author: puch
@@ -16,7 +16,7 @@ define $(_build_)_$(_curr_)_MAKE
 #     or
 #     $(_build_)_$(_curr_)_src_dir=_src
 #=======================================================================================#
-$(_build_)_$(_curr_)_src_dir=pk_dread_slv_code/_src
+$(_build_)_$(_curr_)_src_dir=pk_dread_mst_code/_src
 
 #=======================================================================================#
 # LIB REQUISITES
@@ -49,8 +49,7 @@ $(_build_)_$(_curr_)_lib_name=
  # e.g: $(_build_)_$(_curr_)_bin_objs=$($(_build_)_OBJ_DIR)/my_bin_obj$(_obj_ext_) \
  ##
 $(_build_)_$(_curr_)_bin_objs=\
-   $($(_build_)_OBJ_DIR)/dread_slv$(_obj_ext_) \
-   $($(_build_)_OBJ_DIR)/dread_stdin_friends$(_obj_ext_) \
+   $($(_build_)_OBJ_DIR)/dread_mst$(_obj_ext_) \
 
 ##
  # Library Requisites
@@ -60,11 +59,12 @@ $(_build_)_$(_curr_)_bin_libs=\
 $($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin_hdr$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)tb$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)tb_mailbox$(_lib_ext_) \
+
 ##
  # Target Binary
  # e.g: $(_build_)_$(_curr_)_bin_name=my_bin_name
  ##
-$(_build_)_$(_curr_)_bin_name=dread_slv
+$(_build_)_$(_curr_)_bin_name=dread_mst
 #=======================================================================================#
 # END PACKAGE RULE
 #=======================================================================================#
@@ -90,7 +90,7 @@ endef
 #=======================================================================================#
 include $($(_build_)_PROJECT_DIR)/$($(_build_)_MAK_DIR)/epilog.mk
 #=======================================================================================#
-# dread_slv_makefile.mk
+# dread_mst_makefile.mk
 #=======================================================================================#
 # Changes Log
 #
