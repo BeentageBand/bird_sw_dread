@@ -60,6 +60,10 @@ $(_build_)_$(_curr_)_bin_libs=\
 $($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin_hdr$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)tb$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)tb_mailbox$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)vector$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)iterator$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)vector$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)set$(_lib_ext_) \
 ##
  # Target Binary
  # e.g: $(_build_)_$(_curr_)_bin_name=my_bin_name
