@@ -4,3 +4,6 @@
 [submodule "utilities/pk_object"]
 	path = utilities/pk_object
 	url = https://github.com/BeentageBand/pk_object
+[submodule "system/pks_ipc"]
+	path = system/pks_ipc
+	url = /home/puch/pks/pks_ipc/
