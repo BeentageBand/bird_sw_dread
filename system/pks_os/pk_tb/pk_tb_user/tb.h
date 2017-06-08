@@ -68,6 +68,10 @@ extern const TB_Mail TB_retreive_from_mail_list(TB_Mail_Id_T const * mail_list, 
 
 extern const TB_Mail TB_retreive_mail(uint32_t const timeout_ms);
 
+/**
+ * TB Miscellaneous
+ */
+extern void TB_put_date_string(char * date_str);
 /*=====================================================================================* 
  * Exported Function Like Macros
  *=====================================================================================*/

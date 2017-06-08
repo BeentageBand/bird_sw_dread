@@ -16,6 +16,7 @@
 #include "dread_stdin_hdr_server.h"
 #include "dread_stdin_hdr_set.h"
 #include "convert_endianess.h"
+#include "convert_str.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -64,7 +65,7 @@ void Dr_Stdin_Hdr_Server_v_send_info(Dr_Stdin_Hdr super, uint8_t const * info , 
    if((DREAD_STDIN_INFO_SIZE == info_size)&& this->is_connection_ready)
    {
       info_id = Big_Endian_get_u32(info);
-      Str_Trait_write_number(Dread_Stdin_Buffer, info, DREAD_STDIN_STR_INFO_SIZE, 10);
+      Str_Trait_write_number(Dread_Stdin_Buffer, info_id, DREAD_STDIN_STR_INFO_SIZE, 10);
 
       TB_put_date_string(&Dread_Stdin_Buffer[DREAD_STDIN_STR_INFO_SIZE]);
       if(Dr_Stdin_Hdr_Cbk_backup_info(Dread_Stdin_Buffer, sizeof(Dread_Stdin_Buffer)) )

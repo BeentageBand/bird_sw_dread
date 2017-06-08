@@ -73,16 +73,19 @@ void Dr_Stdin_Cbk_notify_info_result(bool_t const result)
    }
 }
 
-void Dr_Stdin_Hdr_Cbk_backup_info(char const * info, size_t const info_size)
+bool_t Dr_Stdin_Hdr_Cbk_backup_info(char const * info, size_t const info_size)
 {
+   bool_t retval = false;
    if(DR_STDIN_TOTAL_REGISTERS > Ring_Buffer_size(Dr_Stdin_Buffer))
    {
       Ring_Buffer_push(Dr_Stdin_Buffer, info, info_size);
+      retval = true;
    }
    else
    {
       Dr_HID_error(Dr_Stdin_HID, DR_HID_ERROR_NO_REGISTERS);
    }
+   return false;
 }
 
 void Dr_Stdin_Cbk_Shut(void)

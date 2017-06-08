@@ -1,5 +1,5 @@
 #=======================================================================================#
-# object_makefile.mk
+# ring_buffer_makefile.mk
 #=======================================================================================#
 #  Created on: Oct 3, 2015
 #      Author: puch
@@ -16,7 +16,7 @@ define $(_build_)_$(_curr_)_MAKE
 #     or
 #     $(_build_)_$(_curr_)_src_dir=_src
 #=======================================================================================#
-$(_build_)_$(_curr_)_src_dir=pk_object_code/_src
+$(_build_)_$(_curr_)_src_dir=pk_ring_buffer_code/_src
 
 #=======================================================================================#
 # LIB REQUISITES
@@ -27,7 +27,8 @@ $(_build_)_$(_curr_)_src_dir=pk_object_code/_src
  # e.g: $(_build_)_$(_curr_)_lib_objs=$($(_build_)_OBJ_DIR)/my_lib_obj$(_obj_ext_) \
  ##
 $(_build_)_$(_curr_)_lib_objs=\
-   $($(_build_)_OBJ_DIR)/object$(_obj_ext_) \
+   $($(_build_)_OBJ_DIR)/ring_buffer$(_obj_ext_) \
+   $($(_build_)_OBJ_DIR)/ring_buff_it$(_obj_ext_) \
 
 ##
  # Library Requisites
@@ -39,7 +40,7 @@ $(_build_)_$(_curr_)_lib_libs=
  # Target Library
  # e.g: $(_build_)_$(_curr_)_lib_name=my_lib_name
  ##
-$(_build_)_$(_curr_)_lib_name=object
+$(_build_)_$(_curr_)_lib_name=ring_buffer
 
 #=======================================================================================#
 # BIN REQUISITES
@@ -87,7 +88,7 @@ endef
 #=======================================================================================#
 include $($(_build_)_PROJECT_DIR)/$($(_build_)_MAK_DIR)/epilog.mk
 #=======================================================================================#
-# object_makefile.mk
+# ring_buffer_makefile.mk
 #=======================================================================================#
 # Changes Log
 #

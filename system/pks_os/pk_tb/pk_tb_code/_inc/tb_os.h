@@ -15,6 +15,7 @@
  *=====================================================================================*/
 #include "object.h"
 #include "tb_mail.h"
+#include "tb_mailbox.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -37,6 +38,8 @@ Declare_Class(
       TB_Task_Id_T (*search_task)(TB_OS);
       TB_Process_Id_T (*search_pid)(TB_OS);
       void (*set_mailbox)(TB_OS, uint32_t const, uint32_t const);
+      TB_Mailbox (*search_mailbox)(TB_OS obj, uint32_t const, uint32_t const);
+      void (*notify_ready)(TB_OS, uint32_t const);
       );
 /*=====================================================================================* 
  * Exported Object Declarations
@@ -45,6 +48,8 @@ extern TB_OS TB_OS_get_instance(TB_Process_Id_T const pid, uint32_t const max_ta
 extern TB_Task_Id_T TB_OS_search_task(TB_OS obj);
 extern TB_Process_Id_T TB_OS_search_pid(TB_OS obj);
 extern void TB_OS_set_mailbox(TB_OS obj, uint32_t const task_id, uint32_t const pid);
+extern TB_Mailbox TB_OS_search_mailbox(TB_OS obj, uint32_t const task_id, uint32_t const pid);
+extern void TB_OS_notify_ready(TB_OS obj, uint32_t const task_id);
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/

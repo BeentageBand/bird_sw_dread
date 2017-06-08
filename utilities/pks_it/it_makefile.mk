@@ -1,5 +1,5 @@
 #=======================================================================================#
-# tb_makefile.mk
+# it_makefile.mk
 #=======================================================================================#
 #  Created on: Oct 3, 2015
 #      Author: puch
@@ -16,7 +16,7 @@ define $(_build_)_$(_curr_)_MAKE
 #     or
 #     $(_build_)_$(_curr_)_src_dir=_src
 #=======================================================================================#
-$(_build_)_$(_curr_)_src_dir=pk_tb_code/_src
+$(_build_)_$(_curr_)_src_dir=pk_it_code/_src
 
 #=======================================================================================#
 # LIB REQUISITES
@@ -26,21 +26,24 @@ $(_build_)_$(_curr_)_src_dir=pk_tb_code/_src
  # Object Requisites
  # e.g: $(_build_)_$(_curr_)_lib_objs=$($(_build_)_OBJ_DIR)/my_lib_obj$(_obj_ext_) \
  ##
-$(_build_)_$(_curr_)_lib_objs=\
-   $($(_build_)_OBJ_DIR)/tb$(_obj_ext_) \
-   $($(_build_)_OBJ_DIR)/tb_os$(_obj_ext_) \
+$(_build_)_$(_curr_)_lib_objs=
 
 ##
  # Library Requisites
  # e.g: $(_build_)_$(_curr_)_lib_libs=$($(_build_)_LIB_DIR)/$(_lprefix_)my_lib_lib$(_lib_ext_) \
  ##
-$(_build_)_$(_curr_)_lib_libs=
+$(_build_)_$(_curr_)_lib_libs=\
+   $($(_build_)_LIB_DIR)/$(_lprefix_)iterable$(_lib_ext_) \
+   $($(_build_)_LIB_DIR)/$(_lprefix_)iterator$(_lib_ext_) \
+   $($(_build_)_LIB_DIR)/$(_lprefix_)ring_buffer$(_lib_ext_) \
+   $($(_build_)_LIB_DIR)/$(_lprefix_)set$(_lib_ext_) \
+   $($(_build_)_LIB_DIR)/$(_lprefix_)vector$(_lib_ext_) \
 
 ##
  # Target Library
  # e.g: $(_build_)_$(_curr_)_lib_name=my_lib_name
  ##
-$(_build_)_$(_curr_)_lib_name=tb
+$(_build_)_$(_curr_)_lib_name=it
 
 #=======================================================================================#
 # BIN REQUISITES
@@ -88,7 +91,7 @@ endef
 #=======================================================================================#
 include $($(_build_)_PROJECT_DIR)/$($(_build_)_MAK_DIR)/epilog.mk
 #=======================================================================================#
-# tb_makefile.mk
+# it_makefile.mk
 #=======================================================================================#
 # Changes Log
 #

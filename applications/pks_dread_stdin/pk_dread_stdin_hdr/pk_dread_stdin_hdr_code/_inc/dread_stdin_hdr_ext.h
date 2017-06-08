@@ -37,7 +37,7 @@ extern "C" {
  *=====================================================================================*/
 extern void Dr_Stdin_Cbk_Init(void);
 extern void Dr_Stdin_Cbk_notify_info_result(bool_t const result);
-extern void Dr_Stdin_Hdr_Cbk_backup_info(char const * info, size_t const info_size);
+extern bool_t Dr_Stdin_Hdr_Cbk_backup_info(char const * info, size_t const info_size);
 extern void Dr_Stdin_Cbk_Shut(void);
 /*=====================================================================================* 
  * Exported Function Like Macros
