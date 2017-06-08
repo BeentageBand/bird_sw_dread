@@ -1,3 +1,6 @@
 [submodule "pk_project"]
 	path = pk_project
 	url = https://github.com/BeentageBand/pk_project.git
+[submodule "utilities/pk_object"]
+	path = utilities/pk_object
+	url = https://github.com/BeentageBand/pk_object
