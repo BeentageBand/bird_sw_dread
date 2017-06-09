@@ -7,3 +7,6 @@
 [submodule "system/pks_ipc"]
 	path = system/pks_ipc
 	url = /home/puch/pks/bare/pks_ipc/
+[submodule "utilities/pks_template_utils"]
+	path = utilities/pks_template_utils
+	url = https://github.com/BeentageBand/pks_template_utils

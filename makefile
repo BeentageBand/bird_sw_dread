@@ -41,6 +41,7 @@ $(_build_)_MAK_DIR:=pk_project
 #======================================================#
 $(_build_)_PROJECT_INC_DIR+=\
 setup             \
+utilities/pks_template_utils/pk_template_vector/pk_template_vector_code/_src/ \
 
 ifeq "$(_build_)" "avr"
 $(_build_)_PROJECT_INC_DIR+=\
