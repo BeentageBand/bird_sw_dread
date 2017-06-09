@@ -25,7 +25,7 @@ $(_build_)_$(_curr_)_src_dir=pk_dread_standalone_code/_src
 ##
  # Object Requisites
  # e.g: $(_build_)_$(_curr_)_lib_objs=$($(_build_)_OBJ_DIR)/my_lib_obj$(_obj_ext_) \
- ##
+ ##\
 $(_build_)_$(_curr_)_lib_objs=
 
 ##
@@ -56,9 +56,9 @@ $(_build_)_$(_curr_)_bin_objs=\
  # e.g: $(_build_)_$(_curr_)_bin_libs=$($(_build_)_LIB_DIR)/$(_lprefix_)my_bin_lib$(_lib_ext_) \
  ##
 $(_build_)_$(_curr_)_bin_libs=\
+$($(_build_)_LIB_DIR)/$(_lprefix_)sw_dread_launcher$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)ipc_lb$(_lib_ext_) \
-$($(_build_)_LIB_DIR)/$(_lprefix_)template_utils$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)object$(_lib_ext_) \
 
 ##
