@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin_hdr_uset.h
+ * dread_stdin.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,12 +8,13 @@
  *
  */
 /*=====================================================================================*/
-#ifndef DREAD_STDIN_HDR_USET_H_
-#define DREAD_STDIN_HDR_USET_H_
+#ifndef DREAD_STDIN_H_
+#define DREAD_STDIN_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-
+#include "dread_stdin_types.h"
+#include "object.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -21,13 +22,28 @@
 /*=====================================================================================* 
  * Exported Define Macros
  *=====================================================================================*/
+#undef CLASS_NAME
+#undef CLASS_INHERITS
+#undef CLASS_MEMBERS
+#undef CLASS_METHODS
+
+#define CLASS_NAME Dr_Stdin
+#define CLASS_INHERITS Object
+#define CLASS_MEMBERS(_member) \
+_member(uint8_t _private, id) \
+
+#define CLASS_METHODS(_method, _void_method) \
+void _method(ctor, uint8_t const id) \
+void _method(send_info, uint8_t const *, size_t const) \
+bool_t _void_method(is_connection_ready) \
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
-
+CLASS_DECLARATION
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
@@ -43,9 +59,9 @@ extern "C" {
 }
 #endif
 /*=====================================================================================* 
- * dread_stdin_hdr_uset.h
+ * dread_stdin.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*DREAD_STDIN_HDR_USET_H_*/
+#endif /*DREAD_STDIN_H_*/

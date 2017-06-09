@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin_hdr_set.h
+ * dread_stdin_evs.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef DREAD_STDIN_HDR_SET_H_
-#define DREAD_STDIN_HDR_SET_H_
+#ifndef DREAD_STDIN_EVS_H_
+#define DREAD_STDIN_EVS_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -24,6 +24,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define DREAD_STDIN_PRIVATE_MAIL_LIST \
+   PRIVATE_MAIL(DREAD_STDIN_SEND_INFO,             "MAILS TO SEND INFO") \
+   PRIVATE_MAIL(DREAD_STDIN_IS_CONNECTION_RDY,     "MAILS TO REQ CONNECTION STATUS : READY / NOT READY") \
+   PRIVATE_MAIL(DREAD_STDIN_IS_CONNECTION_RDY_RPT, "MAILS BACK TO RPT CONNECTION STATUS : READY / NOT READY") \
+
+#define DREAD_STDIN_SUBSCRIBABLE_MAIL_LIST \
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
@@ -43,9 +50,9 @@ extern "C" {
 }
 #endif
 /*=====================================================================================* 
- * dread_stdin_hdr_set.h
+ * dread_stdin_evs.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*DREAD_STDIN_HDR_SET_H_*/
+#endif /*DREAD_STDIN_EVS_H_*/

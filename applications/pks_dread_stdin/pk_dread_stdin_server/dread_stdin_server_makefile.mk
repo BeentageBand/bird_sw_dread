@@ -1,5 +1,5 @@
 #=======================================================================================#
-# dread_stdin_hdr_makefile.mk
+# dread_stdin_server_makefile.mk
 #=======================================================================================#
 #  Created on: Oct 3, 2015
 #      Author: puch
@@ -16,7 +16,7 @@ define $(_build_)_$(_curr_)_MAKE
 #     or
 #     $(_build_)_$(_curr_)_src_dir=_src
 #=======================================================================================#
-$(_build_)_$(_curr_)_src_dir=pk_dread_stdin_hdr_code/_src
+$(_build_)_$(_curr_)_src_dir=pk_dread_stdin_server_code/_src
 
 #=======================================================================================#
 # LIB REQUISITES
@@ -27,9 +27,7 @@ $(_build_)_$(_curr_)_src_dir=pk_dread_stdin_hdr_code/_src
  # e.g: $(_build_)_$(_curr_)_lib_objs=$($(_build_)_OBJ_DIR)/my_lib_obj$(_obj_ext_) \
  ##
 $(_build_)_$(_curr_)_lib_objs=\
-   $($(_build_)_OBJ_DIR)/dread_stdin_hdr$(_obj_ext_) \
-   $($(_build_)_OBJ_DIR)/dread_stdin_hdr_proxy$(_obj_ext_) \
-   $($(_build_)_OBJ_DIR)/dread_stdin_hdr_server$(_obj_ext_) \
+   $($(_build_)_OBJ_DIR)/dread_stdin_server$(_obj_ext_) \
 
 ##
  # Library Requisites
@@ -41,7 +39,7 @@ $(_build_)_$(_curr_)_lib_libs=
  # Target Library
  # e.g: $(_build_)_$(_curr_)_lib_name=my_lib_name
  ##
-$(_build_)_$(_curr_)_lib_name=dread_stdin_hdr
+$(_build_)_$(_curr_)_lib_name=dread_stdin_server
 
 #=======================================================================================#
 # BIN REQUISITES
@@ -89,7 +87,7 @@ endef
 #=======================================================================================#
 include $($(_build_)_PROJECT_DIR)/$($(_build_)_MAK_DIR)/epilog.mk
 #=======================================================================================#
-# dread_stdin_hdr_makefile.mk
+# dread_stdin_server_makefile.mk
 #=======================================================================================#
 # Changes Log
 #

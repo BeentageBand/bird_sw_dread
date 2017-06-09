@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin_hdr_server.h
+ * dread_stdin_worker_uext.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,12 +8,12 @@
  *
  */
 /*=====================================================================================*/
-#ifndef DREAD_STDIN_HDR_SERVER_H_
-#define DREAD_STDIN_HDR_SERVER_H_
+#ifndef DREAD_STDIN_WORKER_UEXT_H_
+#define DREAD_STDIN_WORKER_UEXT_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_stdin_hdr.h"
+
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -21,19 +21,6 @@
 /*=====================================================================================* 
  * Exported Define Macros
  *=====================================================================================*/
-#undef CLASS_NAME
-#undef CLASS_INHERITS
-#undef CLASS_MEMBERS
-#undef CLASS_METHODS
-
-#define CLASS_NAME Dr_Stdin_Hdr_Server
-#define CLASS_INHERITS Dr_Stdin_Hdr
-#define CLASS_MEMBERS(_member) \
-_member(bool_t _private, is_connection_ready) \
-
-#define CLASS_METHODS(_method, _void_method) \
-void _method(ctor, uint8_t const id) \
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,7 +31,7 @@ extern "C" {
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
-CLASS_DECLARATION
+
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/
@@ -56,9 +43,9 @@ CLASS_DECLARATION
 }
 #endif
 /*=====================================================================================* 
- * dread_stdin_hdr_server.h
+ * dread_stdin_worker_uext.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*DREAD_STDIN_HDR_SERVER_H_*/
+#endif /*DREAD_STDIN_WORKER_UEXT_H_*/

@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_slv.cpp
+ * dread_stdin_proxy.c
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,12 +8,12 @@
  *
  */
 /*=====================================================================================*/
-
+#define CLASS_IMPLEMENTATION
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_stdin_set.h"
-#include "dread_stdin_ext.h"
+#include "ipc.h"
+#include "dread_stdin_proxy.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -33,12 +33,13 @@
 /*=====================================================================================* 
  * Local Function Prototypes
  *=====================================================================================*/
-
+static void Dr_Stdin_Proxy_Ctor(Dr_Stdin_Proxy_T * const this, uint8_t const id);
+static void Dr_Stdin_Proxy_send_info(Dr_Stdin_T * const super,  uint8_t const * info , size_t const info_size);
+static bool_t  Dr_Stdin_Proxy_is_connection_ready(Dr_Stdin_T * const super);
 /*=====================================================================================* 
  * Local Object Definitions
  *=====================================================================================*/
-Ring_Buffer Dr_Stdin_Buffer = NULL;
-Dr_HID Dr_Stdin_HID = NULL;
+CLASS_DEFINITION
 /*=====================================================================================* 
  * Exported Object Definitions
  *=====================================================================================*/
@@ -50,50 +51,72 @@ Dr_HID Dr_Stdin_HID = NULL;
 /*=====================================================================================* 
  * Local Function Definitions
  *=====================================================================================*/
+void Dr_Stdin_Proxy_init(void)
+{
+   printf("%s \n", __FUNCTION__);
 
-/*=====================================================================================*
+   Dr_Stdin_Proxy_Obj.Dr_Stdin = Dr_Stdin();
+
+   memcpy(&Dr_Stdin_Proxy_Vtbl.Dr_Stdin, Dr_Stdin_Proxy_Obj.vtbl,
+         sizeof(Dr_Stdin_Proxy_Vtbl.Dr_Stdin));
+
+   Dr_Stdin_Proxy_Vtbl.Dr_Stdin.Object.rtti = &Dr_Stdin_Proxy_Rtti;
+   Dr_Stdin_Proxy_Vtbl.Dr_Stdin.Object.destroy = Dr_Stdin_Proxy_Dtor;
+
+   Dr_Stdin_Proxy_Vtbl.Dr_Stdin.send_info = Dr_Stdin_Proxy_send_info;
+   Dr_Stdin_Proxy_Vtbl.Dr_Stdin.is_connection_ready = Dr_Stdin_Proxy_is_connection_ready;
+
+   Dr_Stdin_Proxy_Vtbl.ctor = Dr_Stdin_Proxy_Ctor;
+
+   Dr_Stdin_Proxy_Obj.vtbl = &Dr_Stdin_Proxy_Vtbl;
+   Object_update_info(&Dr_Stdin_Proxy_Obj.Dr_Stdin.Object, Dr_Stdin().rtti->rtti);
+
+}
+void Dr_Stdin_Proxy_shut(void) {}
+
+void Dr_Stdin_Proxy_Dtor(Object_T * const obj)
+{
+}
+
+/*=====================================================================================* 
  * Exported Function Definitions
  *=====================================================================================*/
-void Dr_Stdin_Cbk_Init(void)
+void Dr_Stdin_Proxy_Ctor(Dr_Stdin_Proxy_T * const this, uint8_t const id)
 {
-   Dr_Stdin_Buffer = Ring_Buffer_new(DR_STDIN_TOTAL_REGISTERS, DR_STDIN_REGISTER_SIZE);
-   Dr_Stdin_HID = (Dr_HID) Dr_HID_Proxy_New();
+   this->Dr_Stdin.vtbl->ctor(&this->Dr_Stdin, id);
 }
 
-void Dr_Stdin_Cbk_notify_info_result(bool_t const result)
+void Dr_Stdin_Proxy_send_info(Dr_Stdin_T * const  super, uint8_t const * info , size_t const info_size)
 {
-   if(result)
-   {
-      Dr_HID_success(Dr_Stdin_HID, DR_HID_SUCCESS_VALID_CARD);
-   }
-   else
-   {
-      Dr_HID_error(Dr_Stdin_HID, DR_HID_ERROR_INVALID_CARD);
-   }
+   Dr_Stdin_Info_T stdin_info;
+   stdin_info.id = super->id;
+   stdin_info.info = info;
+   stdin_info.info_size = info_size;
+
+   IPC_send(DREAD_STDIN_WORKER, DREAD_STDIN_PROCESS, DREAD_STDIN_SEND_INFO, &stdin_info, sizeof(stdin_info));
 }
 
-bool_t Dr_Stdin_Hdr_Cbk_backup_info(char const * info, size_t const info_size)
+bool_t Dr_Stdin_Proxy_is_connection_ready(Dr_Stdin_T * const  super)
 {
-   bool_t retval = false;
-   if(DR_STDIN_TOTAL_REGISTERS > Ring_Buffer_size(Dr_Stdin_Buffer))
-   {
-      Ring_Buffer_push(Dr_Stdin_Buffer, info, info_size);
-      retval = true;
-   }
-   else
-   {
-      Dr_HID_error(Dr_Stdin_HID, DR_HID_ERROR_NO_REGISTERS);
-   }
-   return false;
-}
+   IPC_Mail_Id_T mail_list[] = {DREAD_STDIN_IS_CONNECTION_RDY_RPT};
+   Mail_T * mail;
 
-void Dr_Stdin_Cbk_Shut(void)
-{
-   Ring_Buffer_delete(Dr_Stdin_Buffer);
-   Dr_HID_delete(Dr_Stdin_HID);
+   if(IPC_subscribe_mail_list(mail_list, Num_Elems(mail_list)))
+   {
+      IPC_send(DREAD_STDIN_WORKER, DREAD_STDIN_PROCESS, DREAD_STDIN_IS_CONNECTION_RDY, NULL, 0);
+
+      mail = IPC_retreive_from_mail_list(mail_list, Num_Elems(mail_list), IPC_RETRIEVE_TOUT_MS);
+
+      IPC_unsubscribe_mail_list(mail_list, Num_Elems(mail_list));
+   }
+   Isnt_Nullptr(mail, false);
+   Isnt_Nullptr(mail->data, false);
+
+
+   return (bool_t)mail->data;
 }
 /*=====================================================================================* 
- * dread_slv.cpp
+ * dread_stdin_proxy.c
  *=====================================================================================*
  * Log History
  *

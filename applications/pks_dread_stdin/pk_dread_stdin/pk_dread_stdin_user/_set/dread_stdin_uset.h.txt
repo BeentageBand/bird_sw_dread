@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin_hdr_set.h
+ * dread_stdin_uset.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,8 +8,8 @@
  *
  */
 /*=====================================================================================*/
-#ifndef DREAD_STDIN_HDR_SET_H_
-#define DREAD_STDIN_HDR_SET_H_
+#ifndef DREAD_STDIN_USET_H_
+#define DREAD_STDIN_USET_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -24,11 +24,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define DREAD_STDIN_INFO_SIZE (4U)  /*Saved info is for rfid card at uint32_t (4 bytes)*/
-#define DREAD_STDIN_STR_INFO_SIZE (10U) /*Saved info in strings is 10 digits long)*/
-#define DR_STDIN_TOTAL_REGISTERS (40U)
-#define DR_STDIN_REGISTER_SIZE (20U)
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
@@ -48,9 +43,9 @@ extern "C" {
 }
 #endif
 /*=====================================================================================* 
- * dread_stdin_hdr_set.h
+ * dread_stdin_uset.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*DREAD_STDIN_HDR_SET_H_*/
+#endif /*DREAD_STDIN_USET_H_*/

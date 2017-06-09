@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin_hdr.h
+ * dread_stdin_worker_types.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,13 +8,12 @@
  *
  */
 /*=====================================================================================*/
-#ifndef DREAD_STDIN_HDR_H_
-#define DREAD_STDIN_HDR_H_
+#ifndef DREAD_STDIN_WORKER_TYPES_H_
+#define DREAD_STDIN_WORKER_TYPES_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_stdin_hdr_types.h"
-#include "object.h"
+
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -22,28 +21,13 @@
 /*=====================================================================================* 
  * Exported Define Macros
  *=====================================================================================*/
-#undef CLASS_NAME
-#undef CLASS_INHERITS
-#undef CLASS_MEMBERS
-#undef CLASS_METHODS
-
-#define CLASS_NAME Dr_Stdin_Hdr
-#define CLASS_INHERITS Object
-#define CLASS_MEMBERS(_member) \
-_member(uint8_t _private, id) \
-
-#define CLASS_METHODS(_method, _void_method) \
-void _method(ctor, uint8_t const id) \
-void _method(send_info, uint8_t const *, size_t const) \
-bool_t _void_method(is_connection_ready) \
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
-CLASS_DECLARATION
+
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
@@ -59,9 +43,9 @@ CLASS_DECLARATION
 }
 #endif
 /*=====================================================================================* 
- * dread_stdin_hdr.h
+ * dread_stdin_worker_types.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*DREAD_STDIN_HDR_H_*/
+#endif /*DREAD_STDIN_WORKER_TYPES_H_*/
