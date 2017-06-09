@@ -33,6 +33,7 @@
 /*=====================================================================================* 
  * Local Function Prototypes
  *=====================================================================================*/
+static void Dr_Stdin_Hdr_Proxy_Ctor(Dr_Stdin_Hdr_Proxy_T * const this, uint8_t const id);
 static void Dr_Stdin_Hdr_Proxy_send_info(Dr_Stdin_Hdr_T * const super,  uint8_t const * info , size_t const info_size);
 static bool_t  Dr_Stdin_Hdr_Proxy_is_connection_ready(Dr_Stdin_Hdr_T * const super);
 /*=====================================================================================* 
@@ -98,7 +99,7 @@ void Dr_Stdin_Hdr_Proxy_send_info(Dr_Stdin_Hdr_T * const  super, uint8_t const *
 bool_t Dr_Stdin_Hdr_Proxy_is_connection_ready(Dr_Stdin_Hdr_T * const  super)
 {
    IPC_Mail_Id_T mail_list[] = {DREAD_STDIN_IS_CONNECTION_RDY_RPT};
-   Mail_T mail;
+   Mail_T * mail;
 
    if(IPC_subscribe_mail_list(mail_list, Num_Elems(mail_list)))
    {
