@@ -31,6 +31,7 @@ TASK_ID(SINGLE, SYSTEM_STORAGE, "STD INPUT FOR DREAD SW") \
 
 #undef TASK_ID
 #define TASK_ID(pid, task, description) task##_WORKER,
+
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/

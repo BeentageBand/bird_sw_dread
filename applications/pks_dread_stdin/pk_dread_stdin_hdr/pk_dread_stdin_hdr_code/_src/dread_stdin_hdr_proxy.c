@@ -72,9 +72,9 @@ void Dr_Stdin_Hdr_Proxy_init(void)
    Object_update_info(&Dr_Stdin_Hdr_Proxy_Obj.Dr_Stdin_Hdr.Object, Dr_Stdin_Hdr().rtti->rtti);
 
 }
-void IPC_shut(void) {}
+void Dr_Stdin_Hdr_Proxy_shut(void) {}
 
-void IPC_Dtor(Object_T * const obj)
+void Dr_Stdin_Hdr_Proxy_Dtor(Object_T * const obj)
 {
 }
 
