@@ -8,7 +8,7 @@
  *
  */
 /*=====================================================================================*/
-
+#define CLASS_IMPLEMENTATION
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -24,8 +24,7 @@
 /*=====================================================================================* 
  * Local Define Macros
  *=====================================================================================*/
-#define DREAD_STDIN_NO_PARAMS(PARAM)
-#define DREAD_STDIN_SEND_INFO_PARAMS(PARAM) ,PARAM(uint8_t const *, info),PARAM(size_t const, info_size)
+
 /*=====================================================================================* 
  * Local Type Definitions
  *=====================================================================================*/
@@ -33,11 +32,11 @@
 /*=====================================================================================* 
  * Local Function Prototypes
  *=====================================================================================*/
-
+static void Dr_Stdin_Hdr_Ctor(Dr_Stdin_Hdr_T * const this, uint8_t const id);
 /*=====================================================================================* 
  * Local Object Definitions
  *=====================================================================================*/
-Define_Class(Dr_Stdin_Hdr, DREAD_STDIN_HDR_CTOR)
+CLASS_DEFINITION
 /*=====================================================================================* 
  * Exported Object Definitions
  *=====================================================================================*/
@@ -49,21 +48,30 @@ Define_Class(Dr_Stdin_Hdr, DREAD_STDIN_HDR_CTOR)
 /*=====================================================================================* 
  * Local Function Definitions
  *=====================================================================================*/
+void Dr_Stdin_Hdr_init(void)
+{
+   printf("%s \n", __FUNCTION__);
+   Dr_Stdin_Hdr_Obj.id = 0;
 
+   Dr_Stdin_Hdr_Vtbl.Object.rtti = &Dr_Stdin_Hdr_Rtti;
+   Dr_Stdin_Hdr_Vtbl.Object.destroy = Dr_Stdin_Hdr_Dtor;
+   Dr_Stdin_Hdr_Vtbl.ctor = Dr_Stdin_Hdr_Ctor;
+   Dr_Stdin_Hdr_Vtbl.send_info = NULL;
+   Dr_Stdin_Hdr_Vtbl.is_connection_ready = NULL;
+
+}
+void Dr_Stdin_Hdr_shut(void) {}
+
+void Dr_Stdin_Hdr_Dtor(Object_T * const obj)
+{
+}
 /*=====================================================================================* 
  * Exported Function Definitions
  *=====================================================================================*/
-void Dr_Stdin_Hdr_Ctor(Dr_Stdin_Hdr this, uint8_t const id)
+void Dr_Stdin_Hdr_Ctor(Dr_Stdin_Hdr_T * const this, uint8_t const id)
 {
-   Acc_Member(Object, this)->vtable = (struct Object_VTable_T *)&Dr_Stdin_Hdr_VTable_Obj;
-   Acc_Method(Object, this)->destroy = Dr_Stdin_Hdr_Dtor;
-   Acc_Method(Dr_Stdin_Hdr, this)->send_info = NULL;
-   Acc_Method(Dr_Stdin_Hdr, this)->is_connection_ready = NULL;
-   Acc_Member(Dr_Stdin_Hdr, this)->id = id;
+   this->id = id;
 }
-
-Define_Virtual_Void_VTable(Dr_Stdin_Hdr, send_info, DREAD_STDIN_SEND_INFO_PARAMS)
-Define_Virtual_VTable(bool_t, 0, Dr_Stdin_Hdr, is_connection_ready, DREAD_STDIN_NO_PARAMS);
 /*=====================================================================================* 
  * dread_stdin_hdr.cpp
  *=====================================================================================*

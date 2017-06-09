@@ -13,8 +13,8 @@
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "object.h"
 #include "dread_stdin_hdr_types.h"
+#include "object.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -22,21 +22,28 @@
 /*=====================================================================================* 
  * Exported Define Macros
  *=====================================================================================*/
+#undef CLASS_NAME
+#undef CLASS_INHERITS
+#undef CLASS_MEMBERS
+#undef CLASS_METHODS
+
+#define CLASS_NAME Dr_Stdin_Hdr
+#define CLASS_INHERITS Object
+#define CLASS_MEMBERS(_member) \
+_member(uint8_t _private, id) \
+
+#define CLASS_METHODS(_method, _void_method) \
+void _method(ctor, uint8_t const id) \
+void _method(send_info, uint8_t const *, size_t const) \
+bool_t _void_method(is_connection_ready) \
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define DREAD_STDIN_HDR_CTOR(PARAM) PARAM(uint8_t const, id)
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
-Declare_Class (
-      Dr_Stdin_Hdr,
-      DREAD_STDIN_HDR_CTOR,
-      uint8_t id;
-      ,
-      void (*send_info)(Dr_Stdin_Hdr, uint8_t const *, size_t const);
-      bool_t (*is_connection_ready)(Dr_Stdin_Hdr);
-      );
+CLASS_DECLARATION
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
@@ -44,8 +51,7 @@ Declare_Class (
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/
-extern void Dr_Stdin_Hdr_send_info(Dr_Stdin_Hdr obj, uint8_t const * info, size_t const info_size);
-extern bool_t Dr_Stdin_Hdr_is_connection_ready(Dr_Stdin_Hdr obj);
+
 /*=====================================================================================* 
  * Exported Function Like Macros
  *=====================================================================================*/

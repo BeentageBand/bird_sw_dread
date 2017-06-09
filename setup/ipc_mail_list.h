@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * tb_uset.h
+ * ipc_mail_list.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,12 +8,12 @@
  *
  */
 /*=====================================================================================*/
-#ifndef TB_USET_H_
-#define TB_USET_H_
+#ifndef IPC_MAIL_LIST_H_
+#define IPC_MAIL_LIST_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-
+#include "dread_stdin_hdr_evs.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -25,12 +25,13 @@
 extern "C" {
 #endif
 
-#define TB_WORKERS_IDS(TASK_ID) \
-TASK_ID(SINGLE, DREAD_STDIN, "STD INPUT FOR DREAD SW") \
-TASK_ID(SINGLE, SYSTEM_STORAGE, "STD INPUT FOR DREAD SW") \
+#define IPC_PRIVATE_MAIL_LIST \
+   DREAD_STDIN_PRIVATE_MAIL_LIST  \
 
-#undef TASK_ID
-#define TASK_ID(pid, task, description) task##_WORKER,
+#define IPC_SUBSCRIBABLE_MAIL_LIST \
+   DREAD_STDIN_SUBSCRIBABLE_MAIL_LIST  \
+
+#define IPC_RETRIEVE_TOUT_MS (500U)
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
@@ -42,23 +43,22 @@ TASK_ID(SINGLE, SYSTEM_STORAGE, "STD INPUT FOR DREAD SW") \
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/
-#undef TB_TASK_ID
-#define TB_TASK_ID(task, description) task,
+#undef IPC_MAIL
+#define IPC_MAIL(mail, description) mail,
+
+#define PRIVATE_MAIL(mail, desc)      IPC_MAIL(mail, desc)
+#define SUBSCRIBABLE_MAIL(mail, desc) IPC_MAIL(mail, desc)
+
+
 enum
 {
-   TB_BEGIN_TASK_ID = 0,
-   TB_WORKERS_IDS(TASK_ID)
-   TB_TOTAL_TASK_IDS_ITEMS
-};
-
-#undef PROCESS_ID
-#define PROCESS_ID(pid, task, description) task##_PROCESS = TB_##pid##_PROCESS,
-enum
-{
-
-   TB_SINGLE_PROCESS,
-   TB_WORKERS_IDS(PROCESS_ID)
-   TB_TOTAL_PROCESS_IDS_ITEMS
+   IPC_BEGIN_PRIVATE_MAIL_LIST_ID = 0,
+   IPC_PRIVATE_MAIL_LIST
+   IPC_END_PRIVATE_MAIL_LIST_ID,
+   IPC_BEGIN_SUBSCRIBABLE_MAIL_LIST_ID = IPC_END_PRIVATE_MAIL_LIST_ID,
+   IPC_SUBSCRIBABLE_MAIL_LIST
+   IPC_END_SUBSCRIBABLE_MAIL_LIST_ID,
+   IPC_TOTAL_MAIL_LIST_ITEMS
 };
 /*=====================================================================================* 
  * Exported Function Like Macros
@@ -67,9 +67,9 @@ enum
 }
 #endif
 /*=====================================================================================* 
- * tb_uset.h
+ * ipc_mail_list.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*TB_USET_H_*/
+#endif /*IPC_MAIL_LIST_H_*/

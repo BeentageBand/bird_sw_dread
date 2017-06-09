@@ -58,8 +58,7 @@ $(_build_)_$(_curr_)_bin_objs=\
  ##
 $(_build_)_$(_curr_)_bin_libs=\
 $($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin$(_lib_ext_) \
-$($(_build_)_LIB_DIR)/$(_lprefix_)os$(_lib_ext_) \
-$($(_build_)_LIB_DIR)/$(_lprefix_)it$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)ipc_lb$(_lib_ext_) \
 ##
  # Target Binary
  # e.g: $(_build_)_$(_curr_)_bin_name=my_bin_name

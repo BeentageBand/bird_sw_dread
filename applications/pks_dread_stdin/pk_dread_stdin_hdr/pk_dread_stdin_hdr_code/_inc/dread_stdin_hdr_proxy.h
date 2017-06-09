@@ -21,18 +21,25 @@
 /*=====================================================================================* 
  * Exported Define Macros
  *=====================================================================================*/
+#undef CLASS_NAME
+#undef CLASS_INHERITS
+#undef CLASS_MEMBERS
+#undef CLASS_METHODS
+
+#define CLASS_NAME Dr_Stdin_Hdr_Proxy
+#define CLASS_INHERITS Dr_Stdin_Hdr
+#define CLASS_MEMBERS(_member) \
+
+#define CLASS_METHODS(_method, _void_method) \
+void _method(ctor, uint8_t const id) \
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define DREAD_STDIN_HDR_PROXY_CTOR(PARAM) PARAM(uint8_t const, id)
-/*=====================================================================================* 
+/*=====================================================================================*
  * Exported Type Declarations
  *=====================================================================================*/
-Declare_Class_Inherits (
-      Dr_Stdin_Hdr_Proxy, Dr_Stdin_Hdr,
-      DREAD_STDIN_HDR_PROXY_CTOR,
-      ,
-      );
+CLASS_DECLARATION
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
@@ -40,8 +47,7 @@ Declare_Class_Inherits (
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/
-extern void Dr_Stdin_Hdr_Proxy_send_info(Dr_Stdin_Hdr_Proxy obj, uint8_t const * info, size_t const info_size);
-extern bool_t Dr_Stdin_Hdr_Proxy_is_connection_ready(Dr_Stdin_Hdr_Proxy obj);
+
 /*=====================================================================================* 
  * Exported Function Like Macros
  *=====================================================================================*/
