@@ -57,7 +57,7 @@ $(_build_)_$(_curr_)_bin_objs=\
  ##
 $(_build_)_$(_curr_)_bin_libs=\
 $($(_build_)_LIB_DIR)/$(_lprefix_)sw_dread_launcher$(_lib_ext_) \
-$($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin_lb$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)ipc_lb$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)object$(_lib_ext_) \
 

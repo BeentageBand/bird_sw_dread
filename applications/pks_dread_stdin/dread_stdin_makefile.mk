@@ -40,7 +40,7 @@ $(_build_)_$(_curr_)_lib_libs=\
  # Target Library
  # e.g: $(_build_)_$(_curr_)_lib_name=my_lib_name
  ##
-$(_build_)_$(_curr_)_lib_name=dread_stdin
+$(_build_)_$(_curr_)_lib_name=dread_stdin_lb
 
 #=======================================================================================#
 # BIN REQUISITES

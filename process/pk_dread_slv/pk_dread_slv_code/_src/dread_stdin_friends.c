@@ -14,6 +14,7 @@
  *=====================================================================================*/
 #include "dread_stdin_set.h"
 #include "dread_stdin_ext.h"
+#include "dread_hid_proxy.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -57,18 +58,18 @@ Dr_HID Dr_Stdin_HID = NULL;
 void Dr_Stdin_Cbk_Init(void)
 {
    Dr_Stdin_Buffer = Ring_Buffer_new(DR_STDIN_TOTAL_REGISTERS, DR_STDIN_REGISTER_SIZE);
-   Dr_Stdin_HID = (Dr_HID) Dr_HID_Proxy_New();
+   Dr_Stdin_HID = & Dr_HID_Proxy_new()->Dr_HID;
 }
 
 void Dr_Stdin_Cbk_notify_info_result(bool_t const result)
 {
    if(result)
    {
-      Dr_HID_success(Dr_Stdin_HID, DR_HID_SUCCESS_VALID_CARD);
+      Dr_Stdin_HID->vtbl->success(Dr_Stdin_HID, DR_HID_SUCCESS_VALID_CARD);
    }
    else
    {
-      Dr_HID_error(Dr_Stdin_HID, DR_HID_ERROR_INVALID_CARD);
+      Dr_Stdin_HID->vtbl->error(Dr_Stdin_HID, DR_HID_ERROR_INVALID_CARD);
    }
 }
 

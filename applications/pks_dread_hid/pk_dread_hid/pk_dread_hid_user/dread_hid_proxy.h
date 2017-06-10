@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * ipc_mail_list.h
+ * dread_hid.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,13 +8,13 @@
  *
  */
 /*=====================================================================================*/
-#ifndef IPC_MAIL_LIST_H_
-#define IPC_MAIL_LIST_H_
+#ifndef DREAD_HID_H_
+#define DREAD_HID_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_hid_evs.h"
-#include "dread_stdin_evs.h"
+#include "dread_hid_types.h"
+#include "object.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -22,23 +22,25 @@
 /*=====================================================================================* 
  * Exported Define Macros
  *=====================================================================================*/
+#undef CLASS_NAME
+#undef CLASS_INHERITS
+#undef CLASS_MEMBERS
+#undef CLASS_METHODS
+
+#define CLASS_NAME Dr_HID_Proxy
+#define CLASS_INHERITS Dr_HID
+#define CLASS_MEMBERS(_member) \
+
+#define CLASS_METHODS(_method, _void_method) \
+void _method(ctor, uint8_t const id) \
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define IPC_PRIVATE_MAIL_LIST \
-   DREAD_STDIN_PRIVATE_MAIL_LIST  \
-   DREAD_HID_PRIVATE_MAIL_LIST \
-
-#define IPC_SUBSCRIBABLE_MAIL_LIST \
-   DREAD_STDIN_SUBSCRIBABLE_MAIL_LIST \
-   DREAD_HID_SUBSCRIBABLE_MAIL_LIST \
-
-#define IPC_RETRIEVE_TOUT_MS (500U)
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
-
+CLASS_DECLARATION
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
@@ -46,23 +48,7 @@ extern "C" {
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/
-#undef IPC_MAIL
-#define IPC_MAIL(mail, description) mail,
 
-#define PRIVATE_MAIL(mail, desc)      IPC_MAIL(mail, desc)
-#define SUBSCRIBABLE_MAIL(mail, desc) IPC_MAIL(mail, desc)
-
-
-enum
-{
-   IPC_BEGIN_PRIVATE_MAIL_LIST_ID = 0,
-   IPC_PRIVATE_MAIL_LIST
-   IPC_END_PRIVATE_MAIL_LIST_ID,
-   IPC_BEGIN_SUBSCRIBABLE_MAIL_LIST_ID = IPC_END_PRIVATE_MAIL_LIST_ID,
-   IPC_SUBSCRIBABLE_MAIL_LIST
-   IPC_END_SUBSCRIBABLE_MAIL_LIST_ID,
-   IPC_TOTAL_MAIL_LIST_ITEMS
-};
 /*=====================================================================================* 
  * Exported Function Like Macros
  *=====================================================================================*/
@@ -70,9 +56,9 @@ enum
 }
 #endif
 /*=====================================================================================* 
- * ipc_mail_list.h
+ * dread_hid.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*IPC_MAIL_LIST_H_*/
+#endif /*DREAD_HID_H_*/

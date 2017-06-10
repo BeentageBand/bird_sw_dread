@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin.c
+ * dread_hid.cpp
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,11 +8,11 @@
  *
  */
 /*=====================================================================================*/
-#define CLASS_IMPLEMENTATION
+#define CLASS_IPLEMENTATION
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_stdin.h"
+#include "dread_hid.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -32,7 +32,7 @@
 /*=====================================================================================* 
  * Local Function Prototypes
  *=====================================================================================*/
-static void Dr_Stdin_Ctor(Dr_Stdin_T * const this, uint8_t const id);
+static void Dr_HID_Ctor(Dr_HID_T * const this, uint8_t const id);
 /*=====================================================================================* 
  * Local Object Definitions
  *=====================================================================================*/
@@ -48,32 +48,32 @@ CLASS_DEFINITION
 /*=====================================================================================* 
  * Local Function Definitions
  *=====================================================================================*/
-void Dr_Stdin_init(void)
+void Dr_HID_init(void)
 {
    printf("%s \n", __FUNCTION__);
-   Dr_Stdin_Obj.id = 0;
+   Dr_HID_Obj.id = 0;
 
-   Dr_Stdin_Vtbl.Object.rtti = &Dr_Stdin_Rtti;
-   Dr_Stdin_Vtbl.Object.destroy = Dr_Stdin_Dtor;
-   Dr_Stdin_Vtbl.ctor = Dr_Stdin_Ctor;
-   Dr_Stdin_Vtbl.send_info = NULL;
-   Dr_Stdin_Vtbl.is_connection_ready = NULL;
+   Dr_HID_Vtbl.Object.rtti = &Dr_HID_Rtti;
+   Dr_HID_Vtbl.Object.destroy = Dr_HID_Dtor;
+   Dr_HID_Vtbl.ctor = Dr_HID_Ctor;
+   Dr_HID_Vtbl.success = NULL;
+   Dr_HID_Vtbl.error = NULL;
 
 }
-void Dr_Stdin_shut(void) {}
+void Dr_HID_shut(void) {}
 
-void Dr_Stdin_Dtor(Object_T * const obj)
+void Dr_HID_Dtor(Object_T * const obj)
 {
 }
 /*=====================================================================================* 
  * Exported Function Definitions
  *=====================================================================================*/
-void Dr_Stdin_Ctor(Dr_Stdin_T * const this, uint8_t const id)
+void Dr_HID_Ctor(Dr_HID_T * const this, uint8_t const id)
 {
    this->id = id;
 }
 /*=====================================================================================* 
- * dread_stdin.c
+ * dread_hid.cpp
  *=====================================================================================*
  * Log History
  *

@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * ipc_mail_list.h
+ * dread_hid_types.h
  * author : puch
  * date : Oct 22 2015
  *
@@ -8,13 +8,12 @@
  *
  */
 /*=====================================================================================*/
-#ifndef IPC_MAIL_LIST_H_
-#define IPC_MAIL_LIST_H_
+#ifndef DREAD_HID_TYPES_H_
+#define DREAD_HID_TYPES_H_
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_hid_evs.h"
-#include "dread_stdin_evs.h"
+#include "std_reuse.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -25,20 +24,25 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define IPC_PRIVATE_MAIL_LIST \
-   DREAD_STDIN_PRIVATE_MAIL_LIST  \
-   DREAD_HID_PRIVATE_MAIL_LIST \
-
-#define IPC_SUBSCRIBABLE_MAIL_LIST \
-   DREAD_STDIN_SUBSCRIBABLE_MAIL_LIST \
-   DREAD_HID_SUBSCRIBABLE_MAIL_LIST \
-
-#define IPC_RETRIEVE_TOUT_MS (500U)
 /*=====================================================================================* 
  * Exported Type Declarations
  *=====================================================================================*/
+typedef enum
+{
+   DR_HID_ERROR_INVALID_CARD,
+   DR_HID_ERROR_NO_REGISTERS
+}Dr_HID_Error_T;
 
+typedef enum
+{
+   DR_HID_SUCCESS_VALID_CARD
+}Dr_HID_Success_T;
+
+typedef struct
+{
+   uint8_t signal;
+   uint8_t type;
+}Dr_HID_HSM_Signal_T;
 /*=====================================================================================* 
  * Exported Object Declarations
  *=====================================================================================*/
@@ -46,23 +50,7 @@ extern "C" {
 /*=====================================================================================* 
  * Exported Function Prototypes
  *=====================================================================================*/
-#undef IPC_MAIL
-#define IPC_MAIL(mail, description) mail,
 
-#define PRIVATE_MAIL(mail, desc)      IPC_MAIL(mail, desc)
-#define SUBSCRIBABLE_MAIL(mail, desc) IPC_MAIL(mail, desc)
-
-
-enum
-{
-   IPC_BEGIN_PRIVATE_MAIL_LIST_ID = 0,
-   IPC_PRIVATE_MAIL_LIST
-   IPC_END_PRIVATE_MAIL_LIST_ID,
-   IPC_BEGIN_SUBSCRIBABLE_MAIL_LIST_ID = IPC_END_PRIVATE_MAIL_LIST_ID,
-   IPC_SUBSCRIBABLE_MAIL_LIST
-   IPC_END_SUBSCRIBABLE_MAIL_LIST_ID,
-   IPC_TOTAL_MAIL_LIST_ITEMS
-};
 /*=====================================================================================* 
  * Exported Function Like Macros
  *=====================================================================================*/
@@ -70,9 +58,9 @@ enum
 }
 #endif
 /*=====================================================================================* 
- * ipc_mail_list.h
+ * dread_hid_types.h
  *=====================================================================================*
  * Log History
  *
  *=====================================================================================*/
-#endif /*IPC_MAIL_LIST_H_*/
+#endif /*DREAD_HID_TYPES_H_*/

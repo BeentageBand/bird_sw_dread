@@ -1,6 +1,6 @@
 /*=====================================================================================*/
 /**
- * dread_stdin.c
+ * dread_hid_server.c
  * author : puch
  * date : Oct 22 2015
  *
@@ -12,7 +12,7 @@
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "dread_stdin.h"
+#include "dread_hid_server.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -32,8 +32,14 @@
 /*=====================================================================================* 
  * Local Function Prototypes
  *=====================================================================================*/
-static void Dr_Stdin_Ctor(Dr_Stdin_T * const this, uint8_t const id);
+
 /*=====================================================================================* 
+ * Local Object Definitions
+ *=====================================================================================*/
+static void Dr_HID_Server_Ctor(Dr_HID_Server_T * const this, uint8_t const id);
+static void Dr_HID_Server_success(Dr_HID_T * const super, Dr_HID_Success_T const success_type);
+static void Dr_HID_Server_error(Dr_HID_T * const super, Dr_HID_Error_T const error_type);
+/*=====================================================================================*
  * Local Object Definitions
  *=====================================================================================*/
 CLASS_DEFINITION
@@ -48,32 +54,56 @@ CLASS_DEFINITION
 /*=====================================================================================* 
  * Local Function Definitions
  *=====================================================================================*/
-void Dr_Stdin_init(void)
+void Dr_HID_Server_init(void)
 {
    printf("%s \n", __FUNCTION__);
-   Dr_Stdin_Obj.id = 0;
 
-   Dr_Stdin_Vtbl.Object.rtti = &Dr_Stdin_Rtti;
-   Dr_Stdin_Vtbl.Object.destroy = Dr_Stdin_Dtor;
-   Dr_Stdin_Vtbl.ctor = Dr_Stdin_Ctor;
-   Dr_Stdin_Vtbl.send_info = NULL;
-   Dr_Stdin_Vtbl.is_connection_ready = NULL;
+   Dr_HID_Server_Obj.Dr_HID = Dr_HID();
+
+   memcpy(&Dr_HID_Server_Vtbl.Dr_HID, Dr_HID_Server_Obj.vtbl,
+         sizeof(Dr_HID_Server_Vtbl.Dr_HID));
+
+   Dr_HID_Server_Vtbl.Dr_HID.Object.rtti = &Dr_HID_Server_Rtti;
+   Dr_HID_Server_Vtbl.Dr_HID.Object.destroy = Dr_HID_Server_Dtor;
+
+   Dr_HID_Server_Vtbl.Dr_HID.success = Dr_HID_Server_success;
+   Dr_HID_Server_Vtbl.Dr_HID.error = Dr_HID_Server_error;
+
+   Dr_HID_Server_Vtbl.ctor = Dr_HID_Server_Ctor;
+
+   Dr_HID_Server_Obj.vtbl = &Dr_HID_Server_Vtbl;
+   Object_update_info(&Dr_HID_Server_Obj.Dr_HID.Object, Dr_HID().rtti->rtti);
 
 }
-void Dr_Stdin_shut(void) {}
+void Dr_HID_Server_shut(void) {}
 
-void Dr_Stdin_Dtor(Object_T * const obj)
+void Dr_HID_Server_Dtor(Object_T * const obj)
 {
 }
-/*=====================================================================================* 
+
+/*=====================================================================================*
  * Exported Function Definitions
  *=====================================================================================*/
-void Dr_Stdin_Ctor(Dr_Stdin_T * const this, uint8_t const id)
+void Dr_HID_Server_Ctor(Dr_HID_Server_T * const this, uint8_t const id)
 {
-   this->id = id;
+   this->Dr_HID.vtbl->ctor(&this->Dr_HID, id);
+}
+
+void Dr_HID_Server_success(Dr_HID_T * const super, Dr_HID_Success_T const success_type)
+{
+   Dr_HID_HSM_Signal_T signal = {DREAD_HID_SUCCESS, success_type};
+   Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
+   this->hsm.vtbl->dispatch(&this->hsm, this, &signal);
+}
+
+void Dr_HID_Server_error(Dr_HID_T * const super, Dr_HID_Error_T const error_type)
+{
+   Dr_HID_HSM_Signal_T signal = {DREAD_HID_ERROR, error_type};
+   Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
+   this->hsm.vtbl->dispatch(&this->hsm, this, &signal);
 }
 /*=====================================================================================* 
- * dread_stdin.c
+ * dread_hid_server.c
  *=====================================================================================*
  * Log History
  *
