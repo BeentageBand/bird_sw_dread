@@ -56,10 +56,10 @@ $(_build_)_$(_curr_)_bin_objs=\
  # e.g: $(_build_)_$(_curr_)_bin_libs=$($(_build_)_LIB_DIR)/$(_lprefix_)my_bin_lib$(_lib_ext_) \
  ##
 $(_build_)_$(_curr_)_bin_libs=\
-$($(_build_)_LIB_DIR)/$(_lprefix_)sw_dread_launcher$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)common_process$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)dread_hid_lb$(_lib_ext_) \
 $($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin_lb$(_lib_ext_) \
-$($(_build_)_LIB_DIR)/$(_lprefix_)ipc_lb$(_lib_ext_) \
-$($(_build_)_LIB_DIR)/$(_lprefix_)object$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)sw_dread_launcher$(_lib_ext_) \
 
 ##
  # Target Binary

@@ -58,7 +58,6 @@ enum
 #define PROCESS_ID(pid, task, description) task##_PROCESS = IPC_##pid##_PROCESS,
 enum
 {
-
    IPC_SINGLE_PROCESS,
    IPC_WORKERS_IDS(PROCESS_ID)
    IPC_TOTAL_PROCESS_IDS_ITEMS
