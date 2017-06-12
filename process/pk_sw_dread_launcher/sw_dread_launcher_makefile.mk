@@ -26,9 +26,7 @@ $(_build_)_$(_curr_)_src_dir=pk_sw_dread_launcher_code/_src
  # Object Requisites
  # e.g: $(_build_)_$(_curr_)_lib_objs=$($(_build_)_OBJ_DIR)/my_lib_obj$(_obj_ext_) \
  ##
-$(_build_)_$(_curr_)_lib_objs=\
-   $($(_build_)_OBJ_DIR)/sw_dread_launcher$(_obj_ext_) \
-   $($(_build_)_OBJ_DIR)/ipc_friends$(_obj_ext_) \
+$(_build_)_$(_curr_)_lib_objs=
 
 ##
  # Library Requisites
@@ -40,7 +38,7 @@ $(_build_)_$(_curr_)_lib_libs=
  # Target Library
  # e.g: $(_build_)_$(_curr_)_lib_name=my_lib_name
  ##
-$(_build_)_$(_curr_)_lib_name=sw_dread_launcher
+$(_build_)_$(_curr_)_lib_name=
 
 #=======================================================================================#
 # BIN REQUISITES
@@ -50,19 +48,24 @@ $(_build_)_$(_curr_)_lib_name=sw_dread_launcher
  # Object Requisites
  # e.g: $(_build_)_$(_curr_)_bin_objs=$($(_build_)_OBJ_DIR)/my_bin_obj$(_obj_ext_) \
  ##
-$(_build_)_$(_curr_)_bin_objs=
+$(_build_)_$(_curr_)_bin_objs=\
+   $($(_build_)_OBJ_DIR)/sw_dread_launcher$(_obj_ext_) \
 
 ##
  # Library Requisites
  # e.g: $(_build_)_$(_curr_)_bin_libs=$($(_build_)_LIB_DIR)/$(_lprefix_)my_bin_lib$(_lib_ext_) \
  ##
-$(_build_)_$(_curr_)_bin_libs=
+$(_build_)_$(_curr_)_bin_libs=\
+$($(_build_)_LIB_DIR)/$(_lprefix_)dread_hid_lb$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)dread_stdin_lb$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)ipc_lb$(_lib_ext_) \
+$($(_build_)_LIB_DIR)/$(_lprefix_)object$(_lib_ext_) \
 
 ##
  # Target Binary
  # e.g: $(_build_)_$(_curr_)_bin_name=my_bin_name
  ##
-$(_build_)_$(_curr_)_bin_name=
+$(_build_)_$(_curr_)_bin_name=sw_dread_launcher
 #=======================================================================================#
 # END PACKAGE RULE
 #=======================================================================================#

@@ -12,11 +12,11 @@
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
-#include "sw_dread_launcher.h"
 #include "ipc_ext.h"
+#include "ipc_light.h"
 #include "ipc_linux_task.h"
 #include "ipc_linux_timestamp.h"
-#include "ipc_light.h"
+#include "publisher_ext.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -59,6 +59,11 @@ static bool_t Is_Singleton = false;
 /*=====================================================================================* 
  * Exported Function Definitions
  *=====================================================================================*/
+void Singleton_Publisher(Publisher_T * const singleton)
+{
+
+}
+
 void Singleton_IPC(IPC_T ** singleton)
 {
    if(!Is_Singleton)
