@@ -8,7 +8,7 @@
  *
  */
 /*=====================================================================================*/
-
+#define CLASS_IMPLEMENTATION
 /*=====================================================================================*
  * Project Includes
  *=====================================================================================*/
@@ -74,10 +74,10 @@ void Singleton_IPC(IPC_T ** singleton)
 
       light->vtbl->ctor(light, IPC_SINGLE_PROCESS, 10);
       linux_timestamp->vtbl->ctor(linux_timestamp, IPC_SINGLE_PROCESS, 10 , &light->IPC);
-      linux_task->vtbl->ctor(linux_task, IPC_SINGLE_PROCESS, 10, &linux_timestamp->IPC_Decorator);
+      linux_task->vtbl->ctor(linux_task, IPC_SINGLE_PROCESS, 10, &linux_timestamp->IPC_Decorator.IPC);
    }
 
-   *singleton = linux_task;
+   *singleton = &linux_task->IPC_Decorator.IPC;
 }
 
 int main(void)

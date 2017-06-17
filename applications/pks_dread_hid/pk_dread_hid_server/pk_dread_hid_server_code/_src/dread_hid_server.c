@@ -91,15 +91,15 @@ void Dr_HID_Server_Ctor(Dr_HID_Server_T * const this, uint8_t const id)
 
 void Dr_HID_Server_success(Dr_HID_T * const super, Dr_HID_Success_T const success_type)
 {
-   Dr_HID_HSM_Signal_T signal = {DREAD_HID_SUCCESS, success_type};
-   Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
+   //Dr_HID_HSM_Signal_T signal = {DREAD_HID_SUCCESS, success_type};
+   //Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
    /*FIXME this->hsm.vtbl->dispatch(&this->hsm, this, &signal);*/
 }
 
 void Dr_HID_Server_error(Dr_HID_T * const super, Dr_HID_Error_T const error_type)
 {
-   Dr_HID_HSM_Signal_T signal = {DREAD_HID_ERROR, error_type};
-   Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
+   //Dr_HID_HSM_Signal_T signal = {DREAD_HID_ERROR, error_type};
+   //Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
    /*FIXME this->hsm.vtbl->dispatch(&this->hsm, this, &signal);*/
 }
 /*=====================================================================================* 
