@@ -10,3 +10,9 @@
 [submodule "utilities/pks_template_utils"]
 	path = utilities/pks_template_utils
 	url = https://github.com/BeentageBand/pks_template_utils
+[submodule "utilities/pk_hama_hsm"]
+	path = utilities/pk_hama_hsm
+	url = https://github.com/BeentageBand/pk_hama_hsm
+[submodule "utilities/pk_hama_dbg_trace"]
+	path = utilities/pk_hama_dbg_trace
+	url = https://github.com/BeentageBand/pk_hama_dbg_trace.git

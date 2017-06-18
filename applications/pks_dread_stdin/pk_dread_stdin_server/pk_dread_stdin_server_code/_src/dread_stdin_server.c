@@ -60,6 +60,7 @@ void Dr_Stdin_Server_init(void)
    printf("%s \n", __FUNCTION__);
 
    Dr_Stdin_Server_Obj.Dr_Stdin = Dr_Stdin();
+   Dr_Stdin_Server_Obj.hsm = Hama_HSM();
    Dr_Stdin_Server_Obj.is_connection_ready = false;
 
    memcpy(&Dr_Stdin_Server_Vtbl.Dr_Stdin, Dr_Stdin_Server_Obj.vtbl,
@@ -89,6 +90,7 @@ void Dr_Stdin_Server_Dtor(Object_T * const obj)
 void Dr_Stdin_Server_Ctor(Dr_Stdin_Server_T * const this, uint8_t const id)
 {
    this->Dr_Stdin.vtbl->ctor(&this->Dr_Stdin, id);
+   this->hsm.vtbl->ctor(&this->hsm, 0, NULL, 0, NULL, 0);
 }
 
 void Dr_Stdin_Server_send_info(Dr_Stdin_T * const super, uint8_t const * info , size_t const info_size)

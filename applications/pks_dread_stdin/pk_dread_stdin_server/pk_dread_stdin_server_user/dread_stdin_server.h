@@ -14,6 +14,7 @@
  * Project Includes
  *=====================================================================================*/
 #include "dread_stdin.h"
+#include "hama_hsm.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -30,6 +31,7 @@
 #define CLASS_INHERITS Dr_Stdin
 #define CLASS_MEMBERS(_member) \
 _member(bool_t _private, is_connection_ready) \
+_member(Hama_HSM_T _private, hsm) \R
 
 #define CLASS_METHODS(_method, _void_method) \
 void _method(ctor, uint8_t const id) \

@@ -14,6 +14,7 @@
  * Project Includes
  *=====================================================================================*/
 #include "worker.h"
+#include "dread_stdin_server.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -29,6 +30,7 @@
 #define CLASS_NAME Dr_Stdin_Worker
 #define CLASS_INHERITS Worker
 #define CLASS_MEMBERS(_member) \
+   _member(Dr_Stdin_Server_T _private, stdin_server)
 
 #define CLASS_METHODS(_method, _void_method)
 

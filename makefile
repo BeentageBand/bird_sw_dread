@@ -28,6 +28,7 @@ host_MACROS+=\
 -DPROGMEM=   \
 
 mega_328P_MACROS+=\
+
 -DF_CPU=8000000L \
 -DAT_328P=1      \
 
