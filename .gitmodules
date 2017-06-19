@@ -16,3 +16,6 @@
 [submodule "utilities/pk_hama_dbg_trace"]
 	path = utilities/pk_hama_dbg_trace
 	url = https://github.com/BeentageBand/pk_hama_dbg_trace.git
+[submodule "system/pk_hamatora_sched"]
+	path = system/pk_hamatora_sched
+	url = https://github.com/BeentageBand/pk_hamatora_sched.git

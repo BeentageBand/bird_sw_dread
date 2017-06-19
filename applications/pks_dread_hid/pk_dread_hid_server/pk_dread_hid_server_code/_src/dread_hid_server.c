@@ -60,6 +60,7 @@ void Dr_HID_Server_init(void)
    printf("%s \n", __FUNCTION__);
 
    Dr_HID_Server_Obj.Dr_HID = Dr_HID();
+   Dr_HID_Server_Obj.hsm = Hama_HSM();
 
    memcpy(&Dr_HID_Server_Vtbl.Dr_HID, Dr_HID_Server_Obj.vtbl,
          sizeof(Dr_HID_Server_Vtbl.Dr_HID));
@@ -87,20 +88,21 @@ void Dr_HID_Server_Dtor(Object_T * const obj)
 void Dr_HID_Server_Ctor(Dr_HID_Server_T * const this, uint8_t const id)
 {
    this->Dr_HID.vtbl->ctor(&this->Dr_HID, id);
+   this->hsm.vtbl->ctor(&this->hsm, 0, NULL, 0, NULL, 0);
 }
 
 void Dr_HID_Server_success(Dr_HID_T * const super, Dr_HID_Success_T const success_type)
 {
-   //Dr_HID_HSM_Signal_T signal = {DREAD_HID_SUCCESS, success_type};
-   //Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
-   /*FIXME this->hsm.vtbl->dispatch(&this->hsm, this, &signal);*/
+   Hama_HSM_Event_T ev = {DREAD_HID_SUCCESS, &success_type, sizeof(success_type)};
+   Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
+   this->hsm.vtbl->dispatch(&this->hsm, &ev);
 }
 
 void Dr_HID_Server_error(Dr_HID_T * const super, Dr_HID_Error_T const error_type)
 {
-   //Dr_HID_HSM_Signal_T signal = {DREAD_HID_ERROR, error_type};
-   //Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
-   /*FIXME this->hsm.vtbl->dispatch(&this->hsm, this, &signal);*/
+   Hama_HSM_Event_T ev = {DREAD_HID_ERROR, &error_type, sizeof(error_type)};
+   Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
+   this->hsm.vtbl->dispatch(&this->hsm, &ev);
 }
 /*=====================================================================================* 
  * dread_hid_server.c

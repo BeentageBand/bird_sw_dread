@@ -50,7 +50,7 @@ static int Dr_Stdin_Handler_Sort(void const * a, void const * b)
  *=====================================================================================*/
 CLASS_DEFINITION
 
-struct Dr_Stdin_Handler_T Dr_Stdin_Handler[] =
+static struct Dr_Stdin_Handler_T Dr_Stdin_Handler[] =
 {
 
 };

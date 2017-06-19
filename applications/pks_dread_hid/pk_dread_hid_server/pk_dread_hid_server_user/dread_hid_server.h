@@ -14,6 +14,7 @@
  * Project Includes
  *=====================================================================================*/
 #include "dread_hid.h"
+#include "hama_hsm.h"
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -28,7 +29,8 @@
 
 #define CLASS_NAME Dr_HID_Server
 #define CLASS_INHERITS Dr_HID
-#define CLASS_MEMBERS(_member)
+#define CLASS_MEMBERS(_member) \
+   _member(Hama_HSM_T _private, hsm)
 
 #define CLASS_METHODS(_method, _void_method) \
 void _method(ctor, uint8_t const id) \

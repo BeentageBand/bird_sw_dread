@@ -25,21 +25,30 @@
 /*=====================================================================================* 
  * Local Define Macros
  *=====================================================================================*/
-CLASS_DEFINITION
+
 /*=====================================================================================* 
  * Local Type Definitions
  *=====================================================================================*/
- 
+ struct Dr_HID_Handler_T
+ {
+    IPC_Mail_Id_T mail_id;
+    void (*process)(Dr_HID_Server_T * const server, void const * data, size_t const data_size);
+ };
 /*=====================================================================================* 
  * Local Function Prototypes
  *=====================================================================================*/
 static void Dr_HID_Worker_on_start(Worker_T * const super);
 static void Dr_HID_Worker_on_loop(Worker_T * const super);
 static void Dr_HID_Worker_on_stop(Worker_T * const super);
+static int Dr_HID_Handler_Compare(void const * a, void const * b);
 /*=====================================================================================* 
  * Local Object Definitions
  *=====================================================================================*/
+CLASS_DEFINITION
+static struct Dr_HID_Handler_T Dr_HID_Handler[] =
+{
 
+};
 /*=====================================================================================* 
  * Exported Object Definitions
  *=====================================================================================*/
@@ -72,19 +81,38 @@ void Dr_HID_Worker_shut(void) {}
 void Dr_HID_Worker_Dtor(Object_T * const obj)
 {
 }
+
+int Dr_HID_Handler_Compare(void const * a, void const * b)
+{
+   IPC_Mail_Id_T const * hid_a = (IPC_Mail_Id_T const *) a;
+   IPC_Mail_Id_T const * hid_b = (IPC_Mail_Id_T const *) b;
+   Isnt_Nullptr(a, 1);
+   Isnt_Nullptr(b, -1);
+   return (*hid_a - * hid_b);
+}
 /*=====================================================================================* 
  * Exported Function Definitions
  *=====================================================================================*/
 void Dr_HID_Worker_on_start(Worker_T * const super)
 {
-   /*TODO start hid */
+   Dr_HID_Worker_T * const this = _dynamic_cast(Dr_HID_Worker, super);
+   Isnt_Nullptr(this,);
+   qsort(&Dr_HID_Handler, Num_Elems(Dr_HID_Handler), sizeof(*Dr_HID_Handler),
+         Dr_HID_Handler_Compare);
 }
 
 void Dr_HID_Worker_on_loop(Worker_T * const super)
 {
+   Dr_HID_Worker_T * const this = _dynamic_cast(Dr_HID_Worker, super);
    Mail_T * const mail = IPC_retreive_mail(IPC_RETRIEVE_TOUT_MS);
-   Isnt_Nullptr(mail,);
-   /* TODO hsm event handler */
+   Isnt_Nullptr(this, );
+   Isnt_Nullptr(mail, );
+   struct Dr_HID_Handler_T * handle = (struct Dr_HID_Handler_T *)bsearch(&mail->mail_id,
+         Dr_HID_Handler, Num_Elems(Dr_HID_Handler), sizeof(*Dr_HID_Handler),
+         Dr_HID_Handler_Compare);
+   Isnt_Nullptr(handle,);
+
+   handle->process(&this->hid_server, mail->data, mail->data_size);
 }
 
 void Dr_HID_Worker_on_stop(Worker_T * const super)
