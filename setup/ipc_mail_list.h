@@ -15,6 +15,7 @@
  *=====================================================================================*/
 #include "dread_hid_evs.h"
 #include "dread_stdin_evs.h"
+#include "hamatora_sched_evs.h"
 #include "worker_evs.h"
 /*=====================================================================================* 
  * Standard Includes
@@ -24,11 +25,13 @@
  * Exported Define Macros
  *=====================================================================================*/
 #define IPC_PRIVATE_MAIL_LIST \
+   HAMA_SCHED_PRIVATE_MAIL_LIST \
    WORKER_PRIVATE_MAIL_LIST \
    DREAD_STDIN_PRIVATE_MAIL_LIST \
    DREAD_HID_PRIVATE_MAIL_LIST \
 
 #define IPC_SUBSCRIBABLE_MAIL_LIST \
+   HAMA_SCHED_SUBSCRIBABLE_MAIL_LIST \
    WORKER_SUBSCRIBABLE_MAIL_LIST \
    DREAD_STDIN_SUBSCRIBABLE_MAIL_LIST \
    DREAD_HID_SUBSCRIBABLE_MAIL_LIST \

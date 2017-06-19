@@ -17,6 +17,11 @@
 #include "ipc_linux_task.h"
 #include "ipc_linux_timestamp.h"
 #include "publisher_ext.h"
+#include "hamatora_sched_def.h"
+#include "dread_hid_task.h"
+#include "dread_stdin_worker.h"
+#include "hamatora_sched.h"
+
 /*=====================================================================================* 
  * Standard Includes
  *=====================================================================================*/
@@ -44,6 +49,8 @@ static IPC_Linux_Task_T * linux_task = NULL;
 static IPC_Linux_Timestamp_T * linux_timestamp = NULL;
 static IPC_Light_T * light = NULL;
 static bool_t Is_Singleton = false;
+static Dr_Stdin_Worker_T Dr_Stdin = Dr_Stdin_Worker();
+static Dr_HID_Worker_T Dr_HID = Dr_HID_Worker();
 /*=====================================================================================* 
  * Exported Object Definitions
  *=====================================================================================*/
@@ -82,11 +89,9 @@ void Singleton_IPC(IPC_T ** singleton)
 
 int main(void)
 {
-   IPC_self_pid();
-
-   _delete(light);
-   _delete(linux_task);
-   _delete(linux_timestamp);
+   Dr_Stdin.Worker.vtbl->ctor(&Dr_Stdin.Worker, DREAD_STDIN_WORKER, IPC_self_pid());
+   Dr_Stdin.Worker.vtbl->ctor(&Dr_Stdin.Worker, DREAD_HID_WORKER, IPC_self_pid());
+   Hama_Sched_run_all_apps();
    return 0;
 }
 /*=====================================================================================* 

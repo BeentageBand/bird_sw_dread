@@ -93,14 +93,14 @@ void Dr_HID_Server_Ctor(Dr_HID_Server_T * const this, uint8_t const id)
 
 void Dr_HID_Server_success(Dr_HID_T * const super, Dr_HID_Success_T const success_type)
 {
-   Hama_HSM_Event_T ev = {DREAD_HID_SUCCESS, &success_type, sizeof(success_type)};
+   Hama_HSM_Event_T ev = {DREAD_HID_SUCCESS, (Dr_HID_Error_T*)&success_type, sizeof(success_type)};
    Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
    this->hsm.vtbl->dispatch(&this->hsm, &ev);
 }
 
 void Dr_HID_Server_error(Dr_HID_T * const super, Dr_HID_Error_T const error_type)
 {
-   Hama_HSM_Event_T ev = {DREAD_HID_ERROR, &error_type, sizeof(error_type)};
+   Hama_HSM_Event_T ev = {DREAD_HID_ERROR, (Dr_HID_Error_T*)&error_type, sizeof(error_type)};
    Dr_HID_Server_T * this = _dynamic_cast(Dr_HID_Server, super);
    this->hsm.vtbl->dispatch(&this->hsm, &ev);
 }
