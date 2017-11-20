@@ -1,4 +1,4 @@
-#define OBJECT_IMPL
+#define OBJECT_IMPLEMENTATION
 
 #include "data_collector.h"
 #include "data_collector_wrkr.h"
@@ -11,13 +11,13 @@ static void data_collector_wrkr_on_loop(union Worker * const super);
 static void data_collector_wrkr_on_mail(union Worker * const super, union Mail * const mail);
 static void data_collector_wrkr_on_stop(union Worker * const super);
 
-union Data_Collector_Wrkr_Class Data_Collector_Disp_Class =
+union Worker_Class Data_Collector_Wrkr_Class =
 {
-   {{&Worker_Class.Object, data_collector_wrkr_delete}},
+   {{&Worker_Class.Class, data_collector_wrkr_delete}},
 };
 
 static union Data_Collector * DCFSM; 
-static union Data_Collector_Wrkr Data_Collector_Disp ={NULL};
+static union Worker Data_Collector_Wrkr = {NULL};
 static uint32_t const Data_Collector_Sub_List[] =
 {
    DATA_COLLECTOR_SUB_LIST(DATA_COLLECTOR_SUB_EV)
@@ -74,7 +74,7 @@ void Allocate_Data_Collector_Wrkr(union Worker ** const this)
    if(NULL == Data_Collector_Wrkr.vtbl)
    {
       Populate_Data_Collector(&DCFSM);
-      Populate_Worker(&Data_Collector_Wrkr, DATA_COLLECTOR_TID);
+      Populate_Worker(&Data_Collector_Wrkr, DREAD_DC_TID);
       Object_Init(&Data_Collector_Wrkr.Object, &Data_Collector_Class.Class,
          sizeof(Data_Collector_Class));
       data_collector_wrkr_init();
@@ -83,3 +83,5 @@ void Allocate_Data_Collector_Wrkr(union Worker ** const this)
    }
    *this = &Data_Collector_Wrkr;
 }
+
+

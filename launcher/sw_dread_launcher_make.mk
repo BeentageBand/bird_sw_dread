@@ -6,6 +6,7 @@ sw_dread_launcher_app_def.h
 $(_flavor_)_$(_feat_)_bin_libs=\
 data_collector \
 object\
+worker \
 
 $(_flavor_)_$(_feat_)_bin_objs=sw_dread_launcher
 $(_flavor_)_$(_feat_)_bin=sw_dread_launcher
