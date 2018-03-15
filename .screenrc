@@ -1,0 +1,17 @@
+shell -${SHELL}
+caption always "%n(%t) : %C"
+defscrollback 4096
+startup_message off
+hardstatus on
+hardstatus alwayslastline
+
+chdir /home/puch/beentageband/project/sw_dread
+screen -t sw_dread 0
+
+split -v
+
+resize -l 132
+focus
+
+screen -t Make         2
+screen -t FileExplorer 1
