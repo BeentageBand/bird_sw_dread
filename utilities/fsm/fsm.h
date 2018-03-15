@@ -1,9 +1,9 @@
 #ifndef FSM_H_
 #define FSM_H_
 
-#include "cobject.h"
+#include "mail.h"
 
-
+union FSM;
 typedef uint32_t FSM_State_T;
 typedef bool_t (*FSM_Transition_Func_T) (union FSM * const, union Mail * const);
 
