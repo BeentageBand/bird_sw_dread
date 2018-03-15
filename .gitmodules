@@ -1,9 +1,9 @@
 [submodule "project_make"]
 	path = project_make
 	url = git@github.com:BeentageBand/project_make
-[submodule "utilities/object"]
-	path = utilities/object
-	url = git@github.com:BeentageBand/object
+[submodule "utilities/cobject"]
+	path = utilities/cobject
+	url = git@github.com:BeentageBand/cobject
 [submodule "utilities/template"]
 	path = utilities/template
 	url = git@github.com:BeentageBand/template
