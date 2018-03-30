@@ -13,10 +13,11 @@ struct FSM_Statechart
    IPC_MID_T signal;
    FSM_State_T next_state;
    FSM_Transition_Func_T transition_to;
-};
+}FSM_Statechart_T;
 
 union FSM
 {
+   struct FSM_Class _private * _private vtbl;
    struct
    {
      struct Object Object;
@@ -24,22 +25,17 @@ union FSM
      struct FSM_Statechart _private * _private statechart;
      uint32_t _private stchrt_size;
    };
-};
+}FSM_T;
 
-union FSM_Class
+struct FSM_Class
 {
-   struct
-   {
-      struct Class Class;
-      void (* _private init)(union FSM * const);
-      void (* _private done)(union FSM * const);
-      void (* _private dispatch)(union FSM * const, IPC_MID_T const,
-         void const * const, size_t const);
-   };
+	struct Class Class;
+	void (* _private init)(union FSM * const);
+	void (* _private done)(union FSM * const);
+	void (* _private dispatch)(union FSM * const this, union Mail * const);
 };
 
-
-extern union FSM_Class _private FSM_Class;
+extern struct FSM_Class _private FSM_Class;
 
 extern void Populate_FSM(union FSM * const this,
    struct FSM_Statechart * const statechart, uint32_t const stchrt_size);

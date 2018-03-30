@@ -1,14 +1,14 @@
-#define COBJECT_IMPL
+#define COBJECT_IMPLEMENTATION
 #include "fsm.h"
 
 static void fsm_delete(struct Object * const obj);
 static void fsm_init(union FSM * const this);
 static void fsm_done(union FSM * const this);
-static void fsm_dispatch(union FSM * const this);
+static void fsm_dispatch(union FSM * const this, union Mail * const mail);
 
-union FSM_Class FSM_Class = 
+struct FSM_Class FSM_Class = 
 {
-   {NULL, fsm_delete},
+   {fsm_delete, NULL},
    fsm_init,
    fsm_done,
    fsm_dispatch,
@@ -18,14 +18,10 @@ union FSM_Class FSM_Class =
 static union FSM FSM = {NULL};
 
 void fsm_delete(struct Object * const obj)
-{
- 
-}
+{}
 
 void fsm_init(union FSM * const this)
-{
-    
-}
+{}
 
 void fsm_done(union FSM * const this)
 {}
@@ -33,14 +29,14 @@ void fsm_done(union FSM * const this)
 void fsm_dispatch(union FSM * const this, union Mail * const mail)
 {
 
-   struct FSM_Statechart st = this->statechart;
+   struct FSM_Statechart * st = this->statechart;
    for(; st != (this->statechart + this->stchrt_size); ++st)
    {
       if(this->state == st->curr_state)
       {
          if(mail->mid == st->signal)
          {
-            st->transition_to(fsm, mail);
+            st->transition_to(this, mail);
             this->state = st->next_state;
             break;
          }
@@ -60,5 +56,3 @@ void Populate_FSM(union FSM * const this,
    }
    memcpy(this, &FSM, sizeof(FSM));
 }
-
-#endif /*FSM_H_*/

@@ -3,10 +3,19 @@
 
 #include "worker.h"
 
-typedef union Worker Data_Collector_T;
+#ifdef __cplusplus
+extern "C"{
+#endif
 
-extern union Worker_Class _private Data_Collector_Wrkr_Class;
+typedef union Worker Data_Collector_Wrkr_T;
+typedef union Worker_Class Data_Collector_Wrkr_Class_T;
 
-extern void Allocate_Data_Collector_Wrkr(union Worker * const this);
+extern Data_Collector_Wrkr_Class_T _private Data_Collector_Wrkr_Class;
+
+extern void Allocate_Data_Collector_Wrkr(union Worker ** const dc);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /*DATA_COLLECTOR_WRKR_H_*/
