@@ -1,5 +1,9 @@
 #define COBJECT_IMPLEMENTATION
+#undef Dbg_FID
+#define Dbg_FID DBG_FID_DEF(DREAD_DC_FID, 0)
+
 #include "data_collector.h"
+#include "dbg_log.h"
 #include "dread_stdin.h"
 #include "ipc.h"
 
@@ -65,7 +69,8 @@ void dcfsm_delete(struct Object * const obj)
 
 void dcfsm_init(union FSM * const fsm)
 {
-	IPC_Subscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
+    bool is_subscribed = IPC_Subscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
+    Dbg_Info("%s: DCFSM is%s subscribed", __func__, (is_subscribed)? "": " not");
 }
 
 void dcfsm_done(union FSM * const fsm)

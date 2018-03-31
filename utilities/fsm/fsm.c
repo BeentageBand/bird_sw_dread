@@ -1,4 +1,8 @@
 #define COBJECT_IMPLEMENTATION
+#undef Dbg_FID
+#define Dbg_FID DBG_FID_DEF(FSM_FID, 0)
+
+#include "dbg_log.h"
 #include "fsm.h"
 
 static void fsm_delete(struct Object * const obj);
@@ -36,6 +40,12 @@ void fsm_dispatch(union FSM * const this, union Mail * const mail)
       {
          if(mail->mid == st->signal)
          {
+        	Dbg_Info("%s: signal %d transitions current state (%d) to state (%d)",
+        		__func__,
+				st->signal,
+				st->curr_state,
+				this->state);
+
             st->transition_to(this, mail);
             this->state = st->next_state;
             break;

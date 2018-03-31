@@ -4,11 +4,11 @@ sw_dread_launcher.h \
 sw_dread_launcher_app_def.h
 
 $(_flavor_)_$(_feat_)_bin_libs=\
-dbg_log \
 data_collector \
 ipc \
 cobject \
 fsm \
+dbg_log \
 
 $(_flavor_)_$(_feat_)_bin_objs=sw_dread_launcher
 $(_flavor_)_$(_feat_)_bin=sw_dread_launcher
