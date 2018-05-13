@@ -7,7 +7,7 @@
 
 struct STDIN_Reg
 {
-	uint8_t raw[STDIN_REG_SIZE];
+   uint8_t raw[STDIN_REG_SIZE];
 };
 
 #endif /*DREAD_STDIN_H_*/

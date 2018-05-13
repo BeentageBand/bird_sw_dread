@@ -19,23 +19,23 @@ static void data_collector_wrkr_on_stop(union Worker * const super);
 
 Data_Collector_Wrkr_Class_T Data_Collector_Wrkr_Class =
     {{//Worker
-	{//Thread
-	    {data_collector_wrkr_delete, &Worker_Class.Class},
-	    NULL,
-	    NULL,
-	    NULL
-	},
-	data_collector_wrkr_on_mail,
-	data_collector_wrkr_on_start,
-	data_collector_wrkr_on_loop,
-	data_collector_wrkr_on_stop
+   {//Thread
+       {data_collector_wrkr_delete, &Worker_Class.Class},
+       NULL,
+       NULL,
+       NULL
+   },
+   data_collector_wrkr_on_mail,
+   data_collector_wrkr_on_start,
+   data_collector_wrkr_on_loop,
+   data_collector_wrkr_on_stop
     }};
 
 static DCFSM_T * DCFSM; 
 static union Worker Data_Collector_Wrkr = {NULL};
 static uint32_t const Data_Collector_Sub_List[] =
     {
-	DATA_COLLECTOR_SUB_LIST(DATA_COLLECTOR_SUB_EV)
+   DATA_COLLECTOR_SUB_LIST(DATA_COLLECTOR_SUB_EV)
     };
 static union Mail DC_Mailbox_Buff[64] = {0};
 
@@ -95,10 +95,10 @@ union Data_Collector_Wrkr * Allocate_Data_Collector_Wrkr(void)
       Alloc_Data_Collector(&DCFSM);
       Populate_Worker(&Data_Collector_Wrkr, DREAD_DC_TID, DC_Mailbox_Buff, Num_Elems(DC_Mailbox_Buff));
       Object_Init(&Data_Collector_Wrkr.Object, &Data_Collector_Wrkr_Class.Class,
-		  sizeof(Data_Collector_Wrkr_Class));
+        sizeof(Data_Collector_Wrkr_Class));
       data_collector_wrkr_init();
       IPC_Subscribe_Mailist(Data_Collector_Sub_List,
-			    Num_Elems(Data_Collector_Sub_List));
+             Num_Elems(Data_Collector_Sub_List));
     }
-  *this = &Data_Collector_Wrkr;
+  return &Data_Collector_Wrkr;
 }

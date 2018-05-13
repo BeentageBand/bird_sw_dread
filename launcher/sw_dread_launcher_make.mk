@@ -8,8 +8,8 @@ data_collector \
 dread_stdin \
 ipc \
 cobject \
-fsm \
 dbg_log \
+state_machine \
 
 $(_flavor_)_$(_feat_)_bin_objs=sw_dread_launcher
 $(_flavor_)_$(_feat_)_bin=sw_dread_launcher

@@ -9,16 +9,16 @@ extern "C"{
 
 typedef union Data_Collector_Wrkr
 {
-	union Worker Worker;
-	union Thread Thread;
-	struct Object Object;
+   union Worker Worker;
+   union Thread Thread;
+   struct Object Object;
 }Data_Collector_Wrkr_T;
 
 typedef union Data_Collector_Wrkr_Class
 {
-	union Worker_Class Worker;
-	struct Thread Thread;
-	struct Class Class;
+   union Worker_Class Worker;
+   struct Thread_Class Thread;
+   struct Class Class;
 }Data_Collector_Wrkr_Class_T;
 
 extern Data_Collector_Wrkr_Class_T _private Data_Collector_Wrkr_Class;

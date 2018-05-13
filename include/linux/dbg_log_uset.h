@@ -2,7 +2,7 @@
 #define DBG_LOG_USET_H_
 
 #define DBG_FID_LIST(FID) \
-	/*  Feature ID,        Dbg Level,    Description */ \
+   /*  Feature ID,        Dbg Level,    Description */ \
    FID(COBJECT_FID,        DBG_INFO_LVL, "Cobject Implementation") \
    FID(DREAD_DC_FID,       DBG_INFO_LVL, "Dread Data Collector") \
    FID(FSM_FID,            DBG_INFO_LVL, "Finite State Machine") \

@@ -57,14 +57,14 @@ static IPC_MID_T DCFSM_Mailist[] =
 
 bool dc_is_valid(uint8_t const * raw, size_t const size)
 {
-	//TODO
-	return false;
+   //TODO
+   return false;
 }
 
 void dcfsm_delete(struct Object * const obj)
 {
-	DCFSM_T * const this = (DCFSM_T *) Object_Cast(&DCFSM_Class.Class, obj);
-	this->vtbl->done(this);
+   DCFSM_T * const this = (DCFSM_T *) Object_Cast(&DCFSM_Class.Class, obj);
+   this->vtbl->done(this);
 }
 
 void dcfsm_init(union FSM * const fsm)
@@ -75,7 +75,7 @@ void dcfsm_init(union FSM * const fsm)
 
 void dcfsm_done(union FSM * const fsm)
 {
-	IPC_Unsubscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
+   IPC_Unsubscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
 }
 
 bool dcfsm_req_stdin_data(union FSM * const fsm, union Mail * const mail)
@@ -143,7 +143,7 @@ bool dcfsm_store_data(union FSM * const fsm, union Mail * const mail)
 
 bool dcfsm_completed(union FSM * const fsm, union Mail * const mail)
 {
-	return true;
+   return true;
 }
 
 void Alloc_Data_Collector(union FSM ** const fsm)

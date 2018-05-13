@@ -5,13 +5,16 @@
 
 typedef enum DC_ERR
 {
-	DC_OK,
-	DC_DATA_TIMEOUT_ERR,
-	DC_INVALID_DATA_ERR,
-	DC_INVALID
+   DC_OK,
+   DC_DATA_TIMEOUT_ERR,
+   DC_INVALID_DATA_ERR,
+   DC_INVALID
 }DC_ERR_T;
 
-typedef union FSM DCFSM_T;
+typedef union DCFSM
+{
+	union FSM FSM;
+}DCFSM_T;
 typedef struct FSM_Class DCFSM_Class_T;
 
 extern DCFSM_Class_T _private DCFSM_Class;
