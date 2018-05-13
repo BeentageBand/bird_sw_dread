@@ -7,12 +7,23 @@
 extern "C"{
 #endif
 
-typedef union Worker Data_Collector_Wrkr_T;
-typedef union Worker_Class Data_Collector_Wrkr_Class_T;
+typedef union Data_Collector_Wrkr
+{
+	union Worker Worker;
+	union Thread Thread;
+	struct Object Object;
+}Data_Collector_Wrkr_T;
+
+typedef union Data_Collector_Wrkr_Class
+{
+	union Worker_Class Worker;
+	struct Thread Thread;
+	struct Class Class;
+}Data_Collector_Wrkr_Class_T;
 
 extern Data_Collector_Wrkr_Class_T _private Data_Collector_Wrkr_Class;
 
-extern void Allocate_Data_Collector_Wrkr(union Worker ** const dc);
+extern union Data_Collector_Wrkr * Allocate_Data_Collector_Wrkr(void);
 
 #ifdef __cplusplus
 }

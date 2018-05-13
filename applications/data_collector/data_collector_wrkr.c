@@ -88,7 +88,7 @@ void data_collector_wrkr_on_stop(union Worker * const super)
   DCFSM->vtbl->done(DCFSM);
 }
 
-void Allocate_Data_Collector_Wrkr(union Worker ** const this)
+union Data_Collector_Wrkr * Allocate_Data_Collector_Wrkr(void)
 {
   if(NULL == Data_Collector_Wrkr.vtbl)
     {

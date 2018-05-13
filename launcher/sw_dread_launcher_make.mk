@@ -5,6 +5,7 @@ sw_dread_launcher_app_def.h
 
 $(_flavor_)_$(_feat_)_bin_libs=\
 data_collector \
+dread_stdin \
 ipc \
 cobject \
 fsm \
