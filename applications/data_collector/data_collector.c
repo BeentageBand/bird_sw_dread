@@ -7,48 +7,32 @@
 #include "dread_stdin.h"
 #include "ipc.h"
 
-typedef enum
-{
-   DC_STATE_IDLE,
-   DC_STATE_WAIT_DATA,
-   DC_STATE_VALIDATE_DATA,
-   DC_STATE_STORAGE,
-   DC_STATE_MAX
-} DC_STATE_T;
 
 static bool dc_is_valid(uint8_t const * raw, size_t const size);
 static void dcfsm_delete(struct Object * const obj);
-static void dcfsm_init(union FSM * const fsm);
-static void dcfsm_done(union FSM * const fsm);
+static void dcfsm_init(union DCFSM * const fsm);
+static void dcfsm_done(union DCFSM * const fsm);
 static bool dcfsm_req_stdin_data(union FSM * const fsm, union Mail * const mail);
 static bool dcfsm_validate_stdin_data(union FSM * const fsm, union Mail * const mail);
 static bool dcfsm_handle_stdin_err(union FSM * const fsm, union Mail * const mail);
 static bool dcfsm_store_data(union FSM * const fsm, union Mail * const mail);
 static bool dcfsm_completed(union FSM * const fsm, union Mail * const mail);
 
+//Declare FSM for Data Collector
+FSM_Declare_Chart(DCFSM_FSM, DC_StChart)
+
+static union St_Machine_State DC_States [DC_STATE_MAX] = {0};
+
 DCFSM_Class_T DCFSM_Class = 
-{//FSM
+{{//FSM
   {dcfsm_delete, &FSM_Class.Class},
   NULL,
   NULL,
   NULL
-};
+}};
 
-static DCFSM_T DCFSM = {NULL};
+static DCFSM_T DCFSM = {{/*FSM*/NULL}};
 
-static struct FSM_Statechart DC_Statechart[] =
-{
-   {DC_STATE_IDLE, DC_INT_POLL_DATA_MID, DC_STATE_WAIT_DATA, dcfsm_req_stdin_data},
-
-   {DC_STATE_WAIT_DATA, STDIN_PBC_INCOMING_DATA_MID, DC_STATE_VALIDATE_DATA, dcfsm_validate_stdin_data},
-   {DC_STATE_WAIT_DATA, DC_INT_STDIN_DATA_TIMEOUT_MID, DC_STATE_IDLE, dcfsm_handle_stdin_err},
-
-   {DC_STATE_VALIDATE_DATA, DC_INT_VALID_DATA_MID, DC_STATE_STORAGE, dcfsm_store_data},
-   {DC_STATE_VALIDATE_DATA, DC_INT_INVALID_DATA_MID, DC_STATE_IDLE, dcfsm_handle_stdin_err},
-
-   {DC_STATE_STORAGE, DC_INT_COMPLETED_STORAGE_MID, DC_STATE_IDLE, dcfsm_completed},
-   {DC_STATE_STORAGE, DC_INT_STORAGE_ERROR_MID, DC_STATE_IDLE, dcfsm_handle_stdin_err}
-};
 
 static IPC_MID_T DCFSM_Mailist[] = 
 {
@@ -67,14 +51,40 @@ void dcfsm_delete(struct Object * const obj)
    this->vtbl->done(this);
 }
 
-void dcfsm_init(union FSM * const fsm)
+void dcfsm_init(union DCFSM * const this)
 {
-    bool is_subscribed = IPC_Subscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
-    Dbg_Info("%s: DCFSM is%s subscribed", __func__, (is_subscribed)? "": " not");
+  bool is_subscribed = IPC_Subscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
+  Dbg_Info("%s: DCFSM is%s subscribed", __func__, (is_subscribed)? "": " not");
+
+  //TODO proper signaling
+  union Mail init_mail = {{NULL}};
+  IPC_MID_T init_fsm = 0;
+  IPC_Self_Send(init_fsm, NULL, 0);
+
+  if( IPC_Retrieve_From_Mailist(&init_mail, &init_fsm, 1, IPC_RETRIEVE_TOUT_MS))
+  {
+   this->State_Machine.vtbl->dispatch(this, &init_mail);
+  }
+  else
+  {
+     Dbg_Fault("%s:Data Collector FSM is not initiallized", __func__);
+  }
 }
 
-void dcfsm_done(union FSM * const fsm)
+void dcfsm_done(union DCFSM * const this)
 {
+  union Mail done_mail = {{NULL}};
+  //TODO fix fsm signaling
+  IPC_MID_T done_fsm = 0;
+  IPC_Self_Send(done_fsm, NULL, 0);
+  if(IPC_Retrieve_From_Mailist(&done_mail, &done_fsm, 1, IPC_RETRIEVE_TOUT_MS))
+  {
+   this->State_Machine.vtbl->dispatch(&this->State_Machine, &done_mail);
+  }
+  else
+  {
+     Dbg_Fault("%s:Unable to finish state_machine", __func__);
+  }
    IPC_Unsubscribe_Mailist(DCFSM_Mailist, Num_Elems(DCFSM_Mailist));
 }
 
@@ -146,14 +156,16 @@ bool dcfsm_completed(union FSM * const fsm, union Mail * const mail)
    return true;
 }
 
-void Alloc_Data_Collector(union FSM ** const fsm)
+DCFSM_T * Alloc_Data_Collector(void)
 {
    if(NULL == DCFSM.vtbl)
    {
-      Populate_FSM(&DCFSM, DC_Statechart, Num_Elems(DC_Statechart));
+      Populate_FSM(&DCFSM, 
+           DC_StChart,
+           Num_Elems(DC_StChart),
+           DC_States,
+           Num_Elems(DC_States));
       Object_Init(&DCFSM.Object, &DCFSM_Class.Class, sizeof(DCFSM_Class));
-      DCFSM_Class.init = dcfsm_init;
-      DCFSM_Class.done = dcfsm_done;
    }
-   *fsm = &DCFSM;
+   return &DCFSM;
 }

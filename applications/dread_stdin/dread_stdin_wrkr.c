@@ -10,17 +10,19 @@ static void dread_stdin_wrkr_on_stop(union Worker * const);
 
 
 Dread_StdIn_Wrkr_Class_T Dread_StdIn_Wrkr_Class  = 
-{{
-   {
+{// StdIn
+{// Worker
+   {// Thread
       {dread_stdin_wrkr_delete, NULL},
       NULL,
       NULL,
-   }
+   }, // Thread
    dread_stdin_wrkr_on_mail,
    dread_stdin_wrkr_on_start,
    dread_stdin_wrkr_on_loop,
    dread_stdin_wrkr_on_stop,
-}};
+}//Worker
+};// StdIn
 
 static Dread_StdIn_Wrkr_T Dread_StdIn_Wrkr = {NULL};
 static union Mail Dread_StdIn_Mailbox_Buff[64] = {0};
@@ -52,9 +54,9 @@ void dread_stdin_wrkr_on_stop(union Worker * const worker)
 
 union Dread_StdIn_Wrkr * Alloc_Dread_StdIn_Wrkr(void)
 {
-   if(NULL == Dread_StIn_Wrkr.vtbl)
+   if(NULL == Dread_StdIn_Wrkr.vtbl)
    {
-      Populate_Worker(&Dread_StIn_Wrkr.Worker, 
+      Populate_Worker(&Dread_StdIn_Wrkr.Worker, 
             DREAD_DS_TID,
             Dread_StdIn_Mailbox_Buff,
             Num_Elems(Dread_StdIn_Mailbox_Buff));

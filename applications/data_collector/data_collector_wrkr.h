@@ -9,6 +9,7 @@ extern "C"{
 
 typedef union Data_Collector_Wrkr
 {
+   union Data_Collector_Wrkr_Class _private * _private vtbl;
    union Worker Worker;
    union Thread Thread;
    struct Object Object;
