@@ -1,0 +1,8 @@
+<manifest>
+	<remote fetch="https://github.com/BeentageBand/" name="bb"/>
+	<default remote="bb" revision="master" sync-s="true" sync-j="4" sync-c="true"/>
+	
+	<project name="sw_dread" path="applications">
+		<linkfile src="manifest/sw-dread.xml" dest=".repo/local_manifests/90-sw-dread.xml"/>
+	</project>
+</manifest>
