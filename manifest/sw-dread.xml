@@ -1,0 +1,10 @@
+<manifest>
+	<project name="cobject" path="utilities/cobject"/>
+	<project name="template" path="utilities/template"/>
+	<project name="state_machine" path="utilities/state_machine"/>
+
+	<project name="ipc" path="system/ipc"/>
+	<project name="application" path="system/application"/>
+
+	<project name="project_make" path="project_make"/>
+</manifest>
