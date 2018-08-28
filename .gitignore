@@ -5,3 +5,5 @@ out
 .project
 .*.swp
 tags
+.vscode
+build.log

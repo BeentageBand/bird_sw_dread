@@ -4,9 +4,8 @@
 #define DBG_FID_LIST(FID) \
    /*  Feature ID,        Dbg Level,    Description */ \
    FID(COBJECT_FID,        DBG_INFO_LVL, "Cobject Implementation") \
-   FID(DREAD_DC_FID,       DBG_INFO_LVL, "Dread Data Collector") \
-   FID(FSM_FID,            DBG_INFO_LVL, "Finite State Machine") \
-   FID(GTEST_FID,          DBG_INFO_LVL, "Gtest Framework") \
+   FID(APP_FID,            DBG_INFO_LVL, "Application") \
+   FID(STATE_MACHINE_FID,  DBG_INFO_LVL, "Finite State Machine") \
    FID(IPC_FID,            DBG_INFO_LVL, "IPC FrameWork") \
 
 #define Dbg_Log_Print(feat_id, lvl, line, ...) \

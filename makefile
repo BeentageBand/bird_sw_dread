@@ -11,7 +11,7 @@ PROJ_DIR=.
 PROJ_MAK_DIR=$(PROJ_DIR)/project_make
 #OUT_DIR=$(HOME)/projects/suite_object_out
 
-FLAVOR_LIST=host linux
+FLAVOR_LIST=linux
 
 #Flavor
 host_build=linux
