@@ -4,6 +4,7 @@ $(_flavor_)_$(_feat_)_bin_objs=dread_launcher
 $(_flavor_)_$(_feat_)_bin_libs=\
 dread_slave_friends \
 ipc_posix \
+hid \
 application \
 ipc \
 cobject \

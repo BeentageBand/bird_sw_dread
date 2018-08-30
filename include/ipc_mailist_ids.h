@@ -3,10 +3,12 @@
 
 #include "application_evs.h"
 #include "worker_evs.h"
+#include "hid_mailist.h"
 
 #define IPC_INTERNAL_MAILIST(X) \
    APP_INT_MAILIST(X) \
-   WORKER_INT_MAILIST(X)  \
+   WORKER_INT_MAILIST(X) \
+   HID_INT_MAILIST(X) \
 
 #define IPC_PUBLIC_MAILIST(X) \
    APP_PBC_MAILIST(X) \

@@ -15,7 +15,7 @@ typedef union HID_Worker_Class
 {
     struct Class Class;
     union Worker_Class Worker;
-    union Thread_Class Thread;
+    struct Thread_Class Thread;
 }HID_Worker_Class_T;
 
 extern union HID_Worker_Class _private HID_Worker_Class;

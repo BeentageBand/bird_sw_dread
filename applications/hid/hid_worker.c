@@ -47,7 +47,11 @@ void hid_worker_on_mail(union Worker * const super, union Mail * const mail)
 }
 
 void hid_worker_on_loop(union Worker * const super)
-{}
+{
+    HID_Process_Blinks();
+    IPC_Sleep(HID_SHORT_TIME_MS);
+}
+
 
 void hid_worker_on_stop(union Worker * const super)
 {
