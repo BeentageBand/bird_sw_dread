@@ -38,11 +38,11 @@ void hid_worker_on_start(union Worker * const super)
 
 void hid_worker_on_mail(union Worker * const super, union Mail * const mail)
 {
-    HID_Process_MID_T mid_pair = {mail.mid, NULL};
-    HID_Process_MID_T * const process = HID_Dispatcher.HID_CSET.vtbl->find(HID_Dispatcher, &mid_pair);
+    HID_Process_MID_T mid_pair = {mail->mid, NULL};
+    HID_Process_MID_T * const process = HID_Dispatcher.HID_CSET.vtbl->find(&HID_Dispatcher, mid_pair);
     if(HID_Dispatcher.HID_CSET.vtbl->end(&HID_Dispatcher) != process)
     {
-        process->obj(worker, mail);
+        process->obj(super, mail);
     }
 }
 
@@ -61,11 +61,11 @@ void hid_worker_on_stop(union Worker * const super)
     }
 }
 
-void Populate_HID_Worker(union HID_Worker * const hid_worker)
+void Populate_HID_Worker(union HID_Worker * const this)
 {
     if(NULL == HID_Worker.vtbl)
     {
-        Populate_HID_Worker(&HID_Worker.Worker, 
+        Populate_Worker(&HID_Worker.Worker, 
         HID_WORKER_TID,
         HID_Worker_Mailbox,
         Num_Elems(HID_Worker_Mailbox));
