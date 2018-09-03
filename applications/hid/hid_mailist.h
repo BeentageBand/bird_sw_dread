@@ -8,4 +8,7 @@ X(HID_INT_BUZZ_SUCESS_MID, "hid_buzz_success") \
 X(HID_INT_BUZZ_ERROR_MID,  "hid_buzz_error") \
 X(HID_INT_BUZZ_INIT_MID,   "hid_buzz_init") \
 
+#define HID_PBC_MAILIST(X) \
+
+
 #endif /*HID_MAILIST_H_*/

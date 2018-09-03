@@ -1,10 +1,30 @@
+#define COBJECT_IMPLEMENTATION
+#define Dbg_FID DREAD_LAUNCHER_FID,1
+#include "dbg_log.h"
 #include "dread_launcher.h"
-#include "ipc_posix.h"
+#include "data_reg_worker.h"
+#include "hid_worker.h"
 
-void Dread_Init(void)
+union Worker * App_Factory_Method(IPC_TID_T const tid)
 {
-    static union IPC_POSIX ipc_posix = {NULL};
-    Populate_IPC_POSIX(&ipc_posix);
-    IPC_Helper_Append(&ipc_posix.IPC_Helper);
+        static union HID_Worker hid = {NULL};
+        static union Data_Reg_Worker data_reg = {NULL};
+
+        union Worker * wrkr = NULL;
+        switch(tid)
+        {
+        case HID_WORKER_TID:
+            Populate_HID_Worker(&hid);
+            wrkr = &hid.Worker;
+            Dbg_Info("%s: creating HID_Worker",__func__);
+            break;
+        case DATA_REG_WORKER_TID:
+            Populate_Data_Reg_Worker(&data_reg);
+            Dbg_Info("%s: creating Data_Reg_Worker",__func__);
+            wrkr = &data_reg.Worker;
+            break;
+        default: break;
+        }
+        return wrkr;
 }
-union Worker * App_Factory_Method(IPC_TID_T const tid) {return NULL;}
+

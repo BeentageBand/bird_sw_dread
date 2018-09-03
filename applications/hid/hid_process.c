@@ -8,7 +8,6 @@
 #undef CHash_Map_Params 
 
 #define HID_PROCESS_MAILIST(X) \
-HID_SUBSCRIPTION_MAILIST(X) \
 X(HID_INT_START_BLINK_MID, hid_start_blink) \
 X(HID_INT_STOP_BLINK_MID,  hid_stop_blink) \
 X(HID_INT_BUZZ_SUCESS_MID, hid_buzz_success) \
@@ -59,7 +58,7 @@ void hid_buzz_success(union HID_Worker * const this, union Mail * const mail)
     HID_Color_T * const color = (HID_Color_T *)mail->payload;
     Isnt_Nullptr(color, );
 
-    hid_beep_times(HID_LONG_TIME_MS, 1, *color);
+    //TODO hid_beep_times(HID_LONG_TIME_MS, 1, *color);
 }
 
 void hid_buzz_error(union HID_Worker * const this, union Mail * const mail)
@@ -67,7 +66,7 @@ void hid_buzz_error(union HID_Worker * const this, union Mail * const mail)
     HID_Color_T * const color = (HID_Color_T *)mail->payload;
     Isnt_Nullptr(color, );
 
-    hid_beep_times(HID_LONG_TIME_MS, 1, *color);
+    //TODO hid_beep_times(HID_LONG_TIME_MS, 1, *color);
 
 }
 
@@ -76,7 +75,7 @@ void hid_buzz_init(union HID_Worker * const this, union Mail * const mail)
     HID_Color_T * const color = (HID_Color_T *)mail->payload;
     Isnt_Nullptr(color, );
     HID_LED.vtbl->off(&HID_LED);
-    hid_beep_times(HID_SHORT_TIME_MS > 1U, 2, *color);
+    //TODO hid_beep_times(HID_SHORT_TIME_MS > 1U, 2, *color);
 
 }
 
