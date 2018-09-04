@@ -14,6 +14,10 @@ static union Data_Reg_Cbk Data_Reg_Cbk = {NULL};
 struct Data_Reg_Cbk_Class Data_Reg_Cbk_Class =
 {
         {data_reg_cbk_delete, NULL},
+        data_reg_notify_success,
+        data_reg_notify_failure,
+        data_reg_req_status,
+        data_reg_backup
 };
 
 void data_reg_cbk_delete(struct Object * const obj)
@@ -48,3 +52,5 @@ void Populate_Data_Reg_Cbk(union Data_Reg_Cbk * const this)
     }
     _clone(this, Data_Reg_Cbk);
 }
+void data_reg_on_data_post_error(union Data_Reg_Worker * const this, union Mail * const mail)
+{}

@@ -1,5 +1,4 @@
 #define COBJECT_IMPLEMENTATION
-#include "data_reg_set.h"
 #include "data_reg_cbk.h"
 #include "data_reg_process.h"
 #include "ipc.h"

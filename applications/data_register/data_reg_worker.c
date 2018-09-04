@@ -44,13 +44,15 @@ void data_reg_worker_on_start(union Worker * const super)
 
 void data_reg_worker_on_mail(union Worker * const super, union Mail * const mail)
 {
+    union Data_Reg_Worker * const this = _cast(Data_Reg_Worker, super);
+    Isnt_Nullptr(this, );
     Data_Reg_Process_MID_T mid_pair = {mail->mid, NULL};
     Dbg_Info("%s:mail mid %d", __func__, mail->mid);
     Data_Reg_Process_MID_T * const process = Data_Reg_Dispatcher.DATA_REG_CSET.vtbl->find(&Data_Reg_Dispatcher.DATA_REG_CSET, mid_pair);
     if(Data_Reg_Dispatcher.DATA_REG_CSET.vtbl->end(&Data_Reg_Dispatcher.DATA_REG_CSET) != process)
     {
         Dbg_Info("%s:found process for mid %d", __func__, mail->mid);
-        process->obj(super, mail);
+        process->obj(this, mail);
     }
 }
 

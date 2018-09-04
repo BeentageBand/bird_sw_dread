@@ -27,13 +27,13 @@ FSM_Declare_Chart(DATA_REG_FSM, Data_Reg_St_Chart)
 static union Data_Reg_FSM Data_Reg_FSM = {NULL};
 static union Data_Reg_Cbk Data_Reg_Cbk = {NULL};
 static CQueue_Data_Register_Token_T Data_Reg_Queue = {NULL};
-static struct Data_Register_Token Data_Reg_Queue_Buff[32] = {NULL};
+static struct Data_Register_Token Data_Reg_Queue_Buff[32] = {0};
 static char Date_Buff[DATA_REG_DATE_MMDDYYYY_HHMM_LENGTH] = {0};
 static union St_Machine_State Data_Reg_States[DATA_REG_MAX_STID] = {0};
 
 union Data_Reg_FSM_Class Data_Reg_FSM_Class =
 {
-        {{data_reg_delete, NULL}}
+        {data_reg_delete, NULL}
 };
 
 static struct Data_Register_Token Current_Proc_Token = {0};

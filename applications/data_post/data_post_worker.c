@@ -44,13 +44,15 @@ void data_post_worker_on_start(union Worker * const super)
 
 void data_post_worker_on_mail(union Worker * const super, union Mail * const mail)
 {
+    union Data_Post_Worker * const this = _cast(Data_Post_Worker, super);
+    Isnt_Nullptr(this, );
     Data_Post_Process_MID_T mid_pair = {mail->mid, NULL};
     Dbg_Info("%s:mail mid %d", __func__, mail->mid);
     Data_Post_Process_MID_T * const process = Data_Post_Dispatcher.DATA_POST_CSET.vtbl->find(&Data_Post_Dispatcher.DATA_POST_CSET, mid_pair);
     if(Data_Post_Dispatcher.DATA_POST_CSET.vtbl->end(&Data_Post_Dispatcher.DATA_POST_CSET) != process)
     {
         Dbg_Info("%s:found process for mid %d", __func__, mail->mid);
-        process->obj(super, mail);
+        process->obj(this, mail);
     }
 }
 

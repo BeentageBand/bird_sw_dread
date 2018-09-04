@@ -3,6 +3,7 @@
 
 #include "application_mailist.h"
 #include "data_reg_mailist.h"
+#include "data_post_mailist.h"
 #include "hid_mailist.h"
 #include "worker_mailist.h"
 

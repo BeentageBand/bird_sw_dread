@@ -34,13 +34,15 @@ void hid_worker_on_start(union Worker * const super)
 
 void hid_worker_on_mail(union Worker * const super, union Mail * const mail)
 {
+    union HID_Worker * const this = _cast(HID_Worker, super);
+    Isnt_Nullptr(this, );
     HID_Process_MID_T mid_pair = {mail->mid, NULL};
     Dbg_Info("%s:mail mid %d", __func__, mail->mid);
     HID_Process_MID_T * const process = HID_Dispatcher.HID_CSET.vtbl->find(&HID_Dispatcher.HID_CSET, mid_pair);
     if(HID_Dispatcher.HID_CSET.vtbl->end(&HID_Dispatcher.HID_CSET) != process)
     {
         Dbg_Info("%s:found process for mid %d", __func__, mail->mid);
-        process->obj(super, mail);
+        process->obj(this, mail);
     }
 }
 

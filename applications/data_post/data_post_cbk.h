@@ -8,8 +8,11 @@
 #ifndef DATA_POST_CBK_H_
 #define DATA_POST_CBK_H_
 
+#include "data_post_set.h"
 #include "data_post_types.h"
-#include "cobject.h"
+#include "data_post_worker.h"
+
+#define DATA_POST_SUBCRIPTION_PROTOTYPES(mid, func) extern void func(union Data_Post_Worker * const, union Mail * const);
 
 typedef union Data_Post_Cbk
 {
@@ -32,5 +35,7 @@ extern struct Data_Post_Cbk_Class _private Data_Post_Cbk_Class;
 
 extern void Populate_Data_Post_Cbk(union Data_Post_Cbk * const cbk);
 
+
+DATA_POST_SUBSCRIPTION_MAILIST(DATA_POST_SUBCRIPTION_PROTOTYPES)
 
 #endif /* DATA_POST_CBK_H_ */

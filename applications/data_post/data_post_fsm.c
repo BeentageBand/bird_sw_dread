@@ -82,11 +82,11 @@ void data_post_open_session(union State_Machine * const st_m)
 
 }
 
-static void data_post_start_packet(union State_Machine * const st_m)
+void data_post_start_packet(union State_Machine * const st_m)
 {
     union Data_Post_FSM * const this = _cast(Data_Post_FSM, st_m);
-    Isnt_Nullptr(this, false);
-    Isnt_Nullptr(this->packet_res_tmr, false);
+    Isnt_Nullptr(this, );
+    Isnt_Nullptr(this->packet_res_tmr, );
 
 
     this->packet->data_left = Data_Post_Cbk.vtbl->get_file_size(&Data_Post_Cbk);
@@ -96,16 +96,18 @@ static void data_post_start_packet(union State_Machine * const st_m)
 
 void data_post_close_session(union State_Machine * const st_m)
 {
-    Data_Post_Cbk.vtbl->close_session(&Data_Post_Cbk);
+    union Data_Post_FSM * const this = _cast(Data_Post_FSM, st_m);
+    Isnt_Nullptr(this, );
+    Data_Post_Cbk.vtbl->close_session(&Data_Post_Cbk, this->session);
 }
 
 void data_post_end(union State_Machine * const st_m)
 {
     union Data_Post_FSM * const this = _cast(Data_Post_FSM, st_m);
-    Isnt_Nullptr(this, false);
-    Isnt_Nullptr(this->packet_res_tmr, false);
-    Isnt_Nullptr(this->retry_session_tmr, false);
-    Isnt_Nullptr(this->session_res_tmr, false);
+    Isnt_Nullptr(this, );
+    Isnt_Nullptr(this->packet_res_tmr, );
+    Isnt_Nullptr(this->retry_session_tmr, );
+    Isnt_Nullptr(this->session_res_tmr, );
     union Timer * tmr = this->retry_session_tmr;
 
     tmr->vtbl->stop(tmr);
@@ -121,7 +123,9 @@ void data_post_packet(union State_Machine * const st_m)
     Isnt_Nullptr(this, );
     Isnt_Nullptr(this->packet_res_tmr, );
     Isnt_Nullptr(this->packet, );
-    Data_Post_Cbk.vtbl->post_packet(&Data_Post_Cbk, this->packet);
+
+    if(this->packet->data_left)
+        Data_Post_Cbk.vtbl->post_packet(&Data_Post_Cbk, this->packet);
 }
 
 void Populate_Data_Post_FSM(union Data_Post_FSM * const this)
