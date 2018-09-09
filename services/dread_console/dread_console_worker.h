@@ -2,7 +2,7 @@
 #define DREAD_CONSOLE_WORKER_H_
 
 #include "worker.h"
-#include "dread_console.h"
+#include "console_composite.h"
 
 typedef union Dread_Console_Worker
 {
@@ -12,7 +12,7 @@ typedef union Dread_Console_Worker
         struct
         {
             union Worker Worker;
-            union Dread_Console _private dread_console;
+            union Console_Composite _private * _private dread_console;
         };
 }Dread_Console_Worker_T;
 

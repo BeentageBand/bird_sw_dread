@@ -2,59 +2,97 @@
 #define Dbg_FID CONSOLE_FID, 3
 
 #include "application.h"
-#include "dread_console_worker.h"
+#include "console_composite.h"
 #include "dbg_log.h"
+#include "dread_console_set.h"
+#include "dread_console_worker.h"
 #include "ipc.h"
 
 #define Dread_Console_MID_Subcription(mid, proc) mid,
+#define DREAD_CONSOLE_LINE_FMT "%"STR(DREAD_CONSOLE_LENGTH)"[^\n]"
 
 static void dread_console_worker_delete(struct Object * const obj);
 static void dread_console_worker_on_start(union Worker * const super);
 static void dread_console_worker_on_mail(union Worker * const super, union Mail * const mail);
 static void dread_console_worker_on_loop(union Worker * const super);
 static void dread_console_worker_on_stop(union Worker * const super);
+static char const ** dread_console_split(char * str, char const delim, size_t * const num_elems);
 
-static union Dread_Console_Worker Dread_Console_Worker = {NULL};
-static union Mail Dread_Console_Worker_Mailbox[64] = {0};
-static char StdIn_Buff[8][]
 union Dread_Console_Worker_Class Dread_Console_Worker_Class =
 {
         {dread_console_worker_delete, NULL}
 };
+
+static union Dread_Console_Worker Dread_Console_Worker = {NULL};
+static union Mail Dread_Console_Worker_Mailbox[64] = {0};
+static union Console_Composite Dread_Console = {NULL};
+static Console_Ptr_T Dread_Console_Buff[IPC_MAX_TID] = {0};
+static char Dread_StdIn_Buff [DREAD_CONSOLE_LENGTH + 1UL] = {0};
+static char const * Dread_Console_Arg_Buff[DREAD_CONSOLE_ARG_LENGTH] = {0};
 
 void dread_console_worker_delete(struct Object * const obj)
 {}
 
 void dread_console_worker_on_start(union Worker * const super)
 {
-    if(IPC_Subscribe_Mailist(Dread_Console_Mailist, Num_Elems(Dread_Console_Mailist)))
-    {
-
-    }
     Application_initialized();
 }
 
 void dread_console_worker_on_mail(union Worker * const super, union Mail * const mail)
 {
-    union Dread_Console_Worker * const this = _cast(Dread_Console_Worker, super);
 }
 
 void dread_console_worker_on_loop(union Worker * const super)
 {
     union Dread_Console_Worker * const this = _cast(Dread_Console_Worker, super);
     Isnt_Nullptr(this, );
-    //TODO read stdin
-    int argc = 1;
-    this->dread_console.vtbl->on_call(&this->dread_console, argc, argv);
+    union Console * cli = &this->dread_console->Console;
+
+    memset(Dread_StdIn_Buff, 0, sizeof(Dread_StdIn_Buff));
+
+    Isnt_Nullptr(cli->in, );
+    size_t scan_size = fscanf( cli->in, DREAD_CONSOLE_LINE_FMT,
+            Dread_StdIn_Buff);
+
+    if(0 == scan_size) return;
+    Dbg_Info("%s: console echo %ul bytes = \"%s\"", __func__, scan_size,(scan_size)? Dread_StdIn_Buff : "empty");
+    size_t argc = 0;
+    char const ** const argv = dread_console_split(Dread_StdIn_Buff, ' ', &argc);
+
+    if(NULL != argv)
+    {
+        cli->vtbl->on_call(cli, argc, argv);
+        memset(Dread_StdIn_Buff, 0, sizeof(Dread_StdIn_Buff));
+    }
 }
 
 void dread_console_worker_on_stop(union Worker * const super)
 {
-    if(IPC_Unsubscribe_Mailist(Dread_Console_Mailist, Num_Elems(Dread_Console_Mailist)))
-    {
-
-    }
     Application_terminated();
+}
+
+char const ** dread_console_split(char * str, char const delim, size_t * const num_elems)
+{
+    memset(Dread_Console_Arg_Buff, 0, sizeof(Dread_Console_Arg_Buff));
+
+    char * i = str;
+    char * begin = str;
+    *num_elems = 0;
+    Dread_Console_Arg_Buff[0] = str;
+    printf("%s\n\n", str);
+    do
+    {
+        i = strchr(begin, delim);
+        if (i != NULL)
+        {
+            *i = '\0';
+            begin = ++i;
+            ++begin;
+            ++(*num_elems);
+            Dread_Console_Arg_Buff[*num_elems] = begin;
+        }
+    }while(NULL != i);
+    return (*num_elems) ? Dread_Console_Arg_Buff : NULL;
 }
 
 void Populate_Dread_Console_Worker(union Dread_Console_Worker * const this)
@@ -62,7 +100,7 @@ void Populate_Dread_Console_Worker(union Dread_Console_Worker * const this)
     if(NULL == Dread_Console_Worker.vtbl)
     {
         Populate_Worker(&Dread_Console_Worker.Worker,
-                DATA_POST_WORKER_TID,
+                DREAD_CONSOLE_WORKER_TID,
                 Dread_Console_Worker_Mailbox,
                 Num_Elems(Dread_Console_Worker_Mailbox));
         Object_Init(&Dread_Console_Worker.Object,
@@ -73,7 +111,17 @@ void Populate_Dread_Console_Worker(union Dread_Console_Worker * const this)
         Dread_Console_Worker_Class.Worker.on_mail  = dread_console_worker_on_mail;
         Dread_Console_Worker_Class.Worker.on_loop  = dread_console_worker_on_loop;
         Dread_Console_Worker_Class.Worker.on_stop  = dread_console_worker_on_stop;
-        Populate_Dread_Console_Dispatcher(&Dread_Console_Dispatcher);
+
+
+        Populate_Console_Composite(&Dread_Console,
+                "dread",
+                NULL,
+                stdin,
+                stdout,
+                Dread_Console_Buff,
+                Num_Elems(Dread_Console_Buff));
+
+        Dread_Console_Worker.dread_console = &Dread_Console;
     }
     _clone(this, Dread_Console_Worker);
 }

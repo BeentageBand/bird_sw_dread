@@ -90,8 +90,9 @@ void Populate_Console_Composite(union Console_Composite * const this,
         Console_Class.on_call = console_composite_on_call;
         Console_Composite.console_set.vtbl = NULL;
     }
-    _clone(this, Console_Composite);
-    Populate_Cset_Cmp_Console_Ptr(&this->console_set,
+    Populate_Console(&this->Console, name, usage, in, out);
+    this->vtbl = &Console_Composite_Class;
+    Populate_CSet_Cmp_Console_Ptr(&this->console_set,
         console_buff,
         n_consoles,
         (CSet_Cmp_T) console_cmp);

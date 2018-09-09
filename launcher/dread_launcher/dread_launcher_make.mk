@@ -7,6 +7,7 @@ cobject \
 console \
 data_reg \
 data_post \
+dread_console \
 dbg_log \
 dread_slave_friends \
 hid \
