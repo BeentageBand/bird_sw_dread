@@ -4,6 +4,7 @@ $(_flavor_)_$(_feat_)_bin_objs=dread_launcher
 $(_flavor_)_$(_feat_)_bin_libs=\
 application \
 cobject \
+console \
 data_reg \
 data_post \
 dbg_log \

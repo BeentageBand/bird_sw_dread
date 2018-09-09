@@ -1,10 +1,3 @@
-/*
- * data_post.h
- *
- *  Created on: Sep 1, 2018
- *      Author: uids6144
- */
-
 #ifndef DATA_POST_WORKER_H_
 #define DATA_POST_WORKER_H_
 
