@@ -22,3 +22,6 @@
 [submodule "utilities/gtest_fwk"]
 	path = utilities/gtest_fwk
 	url = git@github.com:BeentageBand/gtest_fwk
+[submodule "system/console"]
+	path = system/console
+	url = git@github.com:BeentageBand/console.git
