@@ -31,7 +31,7 @@ static union Console_Composite Dread_Console = {NULL};
 static Console_Ptr_T Dread_Console_Buff[IPC_MAX_TID] = {0};
 static union Arg_Parser Dread_Parser = {NULL};
 static char Dread_StdIn_Buff [DREAD_CONSOLE_LENGTH + 1UL] = {0};
-static char const * Dread_Console_Arg_Buff[DREAD_CONSOLE_ARG_LENGTH] = {0};
+static char * Dread_Console_Arg_Buff[DREAD_CONSOLE_ARG_LENGTH] = {0};
 
 void dread_console_worker_delete(struct Object * const obj)
 {}
@@ -55,6 +55,7 @@ void dread_console_worker_on_loop(union Worker * const super)
 
     size_t argc = 0;
     char const ** const argv = Dread_Parser.vtbl->parse(&Dread_Parser, &argc, cli->in);
+    if(0 == argc) return;
 	Dbg_Info("%s: argc %d argv %s", __func__, argc, (NULL != argv)? argv[0] : "NULL");
 
     if(NULL != argv)
