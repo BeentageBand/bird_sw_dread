@@ -2,10 +2,16 @@
 #define Dbg_FID DREAD_LAUNCHER_FID,1
 #include "dbg_log.h"
 #include "dread_launcher.h"
+#include "dread_console_cbk.h"
 #include "dread_console_worker.h"
 #include "data_reg_worker.h"
 #include "data_post_worker.h"
 #include "hid_worker.h"
+
+void Dread_Console_Factory(union Console_Composite * const composite)
+{
+	//composite->vtbl->insert(composite, ;
+}
 
 union Worker * App_Factory_Method(IPC_TID_T const tid)
 {
