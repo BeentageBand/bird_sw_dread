@@ -54,9 +54,9 @@ void dread_console_worker_on_loop(union Worker * const super)
     Isnt_Nullptr(cli->in, );
 
     size_t argc = 0;
-    char const ** const argv = Dread_Parser.vtbl->parse(&Dread_Parser, &argc, cli->in);
+    char ** argv = Dread_Parser.vtbl->parse(&Dread_Parser, &argc, cli->in);
     if(0 == argc) return;
-	Dbg_Info("%s: argc %d argv %s", __func__, argc, (NULL != argv)? argv[0] : "NULL");
+	Dbg_Info("%s: argc %d argv \"%s\"", __func__, argc, (NULL != argv)? argv[0] : "NULL");
 
     if(NULL != argv)
     {
